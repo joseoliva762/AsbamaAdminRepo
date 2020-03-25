@@ -1,0 +1,26 @@
+{% extends "base.html"  %}
+{% import "macros.html" as macros %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}
+    {{super()}}
+    Bienvenido
+{% endblock %}
+
+{% block content%}
+    {% if userIp %}
+        {% if username %}
+            <h1>Hola {{ username | capitalize }}, Bienvenido a Asbama</h1>
+        {% else %}
+            <div class="form__container">
+                <img class="logo" src="{{ url_for('static', filename='images/asbama.jpg') }}" alt="Asbama Logo">
+        {% endif %}
+    {% else %}
+        <a href="{{ url_for('index') }}"> Algo ha salido mal, Reload </a>
+    {% endif %}
+    <!-- <ul>
+        {% for user in users %}
+            {{ macros.render_user(user) }}
+        {% endfor %}
+    </ul> -->
+{% endblock %}

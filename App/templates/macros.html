@@ -1,0 +1,13 @@
+{% macro render_user(user) %}
+    <li>Usuario: {{ user }}</li>
+{% endmacro %}
+
+{% macro render_flashes(message) %}
+    <div class="alert" id="alert">
+        <button type="button"
+                data-dismiss="alert"
+    class="close" onclick="CerrarNotificacionEmergente()">X</button>
+    <!-- window.location.reload() -->
+        {{ message }}
+    </div>
+{% endmacro %}

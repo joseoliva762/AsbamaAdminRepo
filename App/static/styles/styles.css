@@ -1,0 +1,342 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Open Sans', sans-serif;
+    background-color: white;
+    color: black;
+}
+
+/* Header *********************************************************************************************************/
+
+.header__container{
+    margin: 0px;
+    padding: 0px;
+    border-bottom: 1px solid gray;
+    background-color: white;
+}
+.header__container:hover{
+    border-bottom: 1px solid black;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 30px;
+}
+
+.header .header__logo a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: grayscale(1) opacity(0.7);
+    transition: 350ms;
+    outline: none;
+}
+.header .header__logo a{
+    text-decoration: none;
+}
+
+.header__logo a:hover{
+    filter: grayscale(0) opacity(1);
+}
+
+.header__logo-img{
+    width: 80px;
+    margin-right: 10px;
+}
+
+.header__logo-brand{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.brand__info-title{
+    color: #1c5020;
+    font-weight: bold;
+    padding: 0px;
+    margin: 0px;
+}
+
+.brand__info-slg{
+    color: black;
+    font-size: small;
+    padding-bottom: -10px;
+}
+
+.navbar{
+    padding: 0px;
+    margin: 0px;
+    width: 120px;
+}
+
+.navbar__menu{
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+}
+
+.navbar__menu-item{
+    font-weight: bold;
+    color: black;
+    font-size: 14px;
+}
+
+.navbar__menu-item a{
+    text-decoration: none;
+    text-align: center;
+    filter: grayscale(1) opacity(0.7);
+    transition: 200ms;
+}
+
+.navbar__menu-item a:hover{
+    filter: grayscale(0) opacity(1);
+    color: #1c5020;
+    text-decoration: underline;
+    outline: none;
+}
+
+/* Content ***********************************************************************************/
+
+.container{
+    background-color: #dfdfdf;
+}
+
+.container .content{
+    width: 80%;
+    background-color: white;
+    margin: 0 auto;
+    text-align: center;
+    padding: 50px 0;
+}
+
+/* Not Found ********************************************************************************/
+.error__alert{
+    width: 50%;
+    margin: 0px auto;
+    padding: 100px 0;
+}
+
+.error__alert-code{
+    font-size: 100px;
+    color: black;
+    font-weight: bolder;
+    transition: 100ms;
+}
+
+.error__alert-msg{
+    text-align: center;
+    font-size: large;
+    color: black;
+    font-weight: bold;
+}
+
+.errer__alert-ficha-tecnica{
+    padding: 20px 0 0 0;
+    font-size: 12px;
+    color: #6f6f6f;
+}
+
+/* Boun section  *************************************************************************/
+
+.animated:hover {
+    animation-duration: 1.5s;
+    animation-fill-mode: both;
+    animation-iteration-count: infinite;
+    color: #1c5020;
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-30px);}
+    60% {transform: translateY(-15px);}
+}
+.bounce {
+    animation-name: bounce;
+}
+
+/* Login ************************************************************************************/
+.form__container{
+    border: 2px solid #dfdfdf;
+    width: 35%;
+    height: 450px;
+    margin: 0px auto;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 380px;
+}
+
+.form__container:hover{
+    border: 2px solid #cfcfcf;
+}
+
+.logo{
+    width: 200px;
+}
+
+.form__container-session{
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container__session-item{
+    width: 100%;
+    height: 30px;
+    padding: 5px;
+    margin: 20px 0;
+    border-bottom: 2px solid#6f6f6f;
+}
+
+.container__session-item:hover{
+    border-bottom: 2px solid black;
+    color: black;
+}
+
+.container__session-item > label{
+    font-size: small;
+    color: #6f6f6f;
+    font-weight: bold;
+}
+
+.container__session-item > input{
+    border: none;
+    outline: none;
+    color: black;
+}
+
+.container__session-submit{
+    width: 100%;
+    outline: none;
+}
+
+#submit{
+    width: 100%;
+    height: 40px;
+    background-color: #dfdfdf;
+    color: black;
+    border-radius: 20px;
+    margin: 10px 0;
+    outline: none;
+}
+
+/**** FOotet ***************************************************************************************/
+.footer__container{
+    margin: 0px;
+    padding: 20px;
+    background-color: #dfdfdf;
+}
+
+.footer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #dfdfdf;
+}
+
+.copy{
+    background-color: #dfdfdf;
+    color: black;
+    font-size: small;
+}
+.copy a{
+    font-weight: bold;
+    text-decoration: none;
+    background-color: #dfdfdf;
+}
+
+.copy a:hover{
+    text-decoration: underline;
+}
+
+.alert{
+    height: 50px;
+    padding: 0 20px;
+    background-color: #d8edd0;
+    border: 1px solid #e8f3e4;
+    border-radius: 5px;
+    color: #4d7448;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    text-align: center;
+}
+
+.alert:hover{
+    cursor: pointer;
+}
+
+.alert > button{
+    color: #4d7448;
+    background-color: #d8edd0;
+    border: none;
+    outline: none;
+    padding: 10px;
+}
+
+.alert > button:hover{
+    display: none;
+    cursor: pointer;
+}
+
+
+
+
+@media(max-width: 1100px){
+    .form__container{
+        border: none;
+        width: 100%;
+        margin: 0px auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .form__container:hover{
+        border: none;
+    }
+}
+@media(max-width: 450px){
+
+    .header{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 30px;
+    }
+    .header .header__logo a{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .header__logo-img{
+        margin: 0px;
+    }
+    .header__logo-brand{
+        align-items: center;
+    }
+    .brand__info-slg{
+        padding: 0px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+    .navbar{
+        margin-bottom: 5px;
+        font-size: 8px;
+    }
+    .container .content{
+        width: 95%;
+        background-color: white;
+        padding: 10px 0;
+    }
+    .copy{
+        text-align: center;
+    }
+}
