@@ -1,6 +1,6 @@
 from . import auth
 from App.forms import LoginForm
-from flask_login import login_user
+from flask_login import login_user, login_required, logout_user
 from flask import render_template, redirect, url_for, flash, request, session, make_response
 from App.firestoreService import getUser
 from App.model import UserData, UserModel
@@ -39,3 +39,10 @@ def login():
         else:
             flash("El usuario {}, No has sido encontrado.".format(username))
     return render_template('login.html', **context)
+
+@auth.route('logout')
+@login_required
+def logout():
+    logout_user()
+    flash("Sesion Cerrada.")
+    return redirect( url_for('auth.login'))

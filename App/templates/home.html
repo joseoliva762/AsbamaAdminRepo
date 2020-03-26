@@ -10,10 +10,13 @@
 {% block content%}
     {% if userIp %}
         {% if username %}
-            <h1>Hola {{ username | capitalize }}, Bienvenido a Asbama</h1>
         {% else %}
-            <div class="form__container">
-                <img class="logo" src="{{ url_for('static', filename='images/asbama.jpg') }}" alt="Asbama Logo">
+        <!-- Arreglar el home -->
+            {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+            {% endif %}
+            <h1>Hola {{ username | capitalize }}, Bienvenido a Asbama</h1>
+            <img class="logo" src="{{ url_for('static', filename='images/asbama.jpg') }}" alt="Asbama Logo">
         {% endif %}
     {% else %}
         <a href="{{ url_for('index') }}"> Algo ha salido mal, Reload </a>
