@@ -36,9 +36,9 @@ def login():
                 flash('Usario: {}, Ah iniciado sesion con exito'.format(user.username.title()))
                 return redirect(url_for('home'))
             else:
-                flash("Contraseña incorrecta, vuelva a intentarlo.")
+                flash("Contraseña incorrecta, vuelva a intentarlo.", 'error')
         else:
-            flash("El usuario {}, No has sido encontrado.".format(username))
+            flash("El usuario {}, No has sido encontrado.".format(username), 'error')
     return render_template('login.html', **context)
 
 @auth.route('logout')

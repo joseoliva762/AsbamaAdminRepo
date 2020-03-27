@@ -15,8 +15,8 @@
             <div class="header__container">
                 {% include 'header.html' %}
             </div>
-            {% for message in get_flashed_messages() %}
-                {{ macros.render_flashes(message) }}
+            {% for category, message in get_flashed_messages(with_categories=true) %}
+                {{ macros.render_flashes(category, message) }}
             {% endfor %}
             <section class="container">
                 {% include 'reabon.html' %}
@@ -32,7 +32,12 @@
         </body>
         <script type="text/javascript">
             function CerrarNotificacionEmergente(){
-                var contenedor = document.getElementById("alert");
+                var contenedor = document.getElementById("alerta");
+                contenedor.style.display = "none";
+                return true;
+            }
+            function CerrarNotificacionEmergenteError(){
+                var contenedor = document.getElementById("error");
                 contenedor.style.display = "none";
                 return true;
             }
