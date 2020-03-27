@@ -9,21 +9,9 @@
 
 {% block content%}
     {% if userIp %}
-        {% if username %}
-        {% else %}
-        <!-- Arreglar el home -->
-            {% if current_user.is_authenticated %}
-                <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
-            {% endif %}
-            <h1>Hola {{ username | capitalize }}, Bienvenido a Asbama</h1>
-            <img class="logo" src="{{ url_for('static', filename='images/asbama.jpg') }}" alt="Asbama Logo">
-        {% endif %}
+        <h1>Hola {{ username | capitalize }}, Bienvenido a Asbama</h1>
+        <img class="logo" src="{{ url_for('static', filename='images/asbama.jpg') }}" alt="Asbama Logo">
     {% else %}
         <a href="{{ url_for('index') }}"> Algo ha salido mal, Reload </a>
     {% endif %}
-    <!-- <ul>
-        {% for user in users %}
-            {{ macros.render_user(user) }}
-        {% endfor %}
-    </ul> -->
 {% endblock %}

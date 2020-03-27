@@ -28,7 +28,8 @@ def login():
                     password=password,
                     id=userDoc.id,
                     correo=userDoc.to_dict()['correo'],
-                    nombre=userDoc.to_dict()['nombre']
+                    nombre=userDoc.to_dict()['nombre'],
+                    role=userDoc.to_dict()['role']
                 )
                 user = UserModel(userData)
                 login_user(user)
