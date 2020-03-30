@@ -1,6 +1,7 @@
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
+import uuid
 
 if (not len(firebase_admin._apps)):
     credential = credentials.ApplicationDefault()
@@ -23,3 +24,22 @@ def getUser(username):
 
 def getUserById(userId):
     return db.collection('users').document(userId).get()
+
+def putUser(userData):
+    userRef = db.collection('users').document(userData.id)
+    userRef.set({
+        'username': userData.username,
+        'password': userData.password,
+        'correo': userData.correo,
+        'nombre': userData.nombre,
+        'role': userData.role
+        })
+
+def getNewId():
+    return uuid.uuid1()
+
+def updatePassword(user, password):
+    userRef = db.collection('users').document(user.id)
+    userRef.update({
+        'password': password,
+    })

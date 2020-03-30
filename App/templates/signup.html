@@ -1,0 +1,43 @@
+{% extends "base.html"  %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}
+    {{super()}}
+    Sign Up
+{% endblock %}
+
+{% block content%}
+    {% if userIp %}
+        <div class="form__container">
+            <img class="logo" src="{{ url_for('static', filename='images/asbama.jpg') }}" alt="Asbama Logo">
+            <form action="{{ url_for('auth.signup') }}" method="POST" class="form__container-session" role="form">
+                <div class="container__session-item">
+                    {{ signup.correo.label }}
+                    {{ signup.correo }}
+                </div>
+                <div class="container__session-item">
+                    {{ signup.nombre.label }}
+                    {{ signup.nombre }}
+                </div>
+                <div class="container__session-item">
+                    {{ signup.role.label }}
+                    {{ signup.role }}
+                </div>
+                <div class="container__session-item">
+                    {{ signup.username.label }}
+                    {{ signup.username }}
+                </div>
+                <div class="container__session-item">
+                    {{ signup.password.label }}
+                    {{ signup.password }}
+                </div>
+                <div class="container__session-submit">
+                    {{ signup.submit }}
+                </div>
+                <!-- {{ wtf.quick_form(signup) }} -->
+            </form>
+        </div>
+    {% else %}
+        <a href="{{ url_for('index') }}"> Algo ha salido mal, Reload </a>
+    {% endif %}
+{% endblock %}

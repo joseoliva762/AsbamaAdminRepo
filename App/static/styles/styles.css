@@ -108,7 +108,7 @@
 }
 
 .container .content{
-    min-height: 304px;
+    min-height: 680px;
     width: 80%;
     background-color: white;
     margin: 0 auto;
@@ -116,7 +116,7 @@
     padding: 50px 0;
 }
 
-.reabon{
+.ribbon{
     padding: 0;
     /* border-bottom: 1px solid #dfdfdf; */
     margin: 0;
@@ -124,7 +124,8 @@
     width: 80%;
     margin: 0 auto;
 }
-.reabon .reabon__list{
+/* RIBBON *****************************************************************************************/
+.ribbon .ribbon__list{
     height: 100%;
     width: 97%;
     display: flex;
@@ -132,29 +133,110 @@
     justify-content: flex-end;
     align-items: center;
 }
-.reabon__list--item{
+.ribbon__list--item{
     padding: 0 5px;
     height: 100%;
     transition: 200ms;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 
-.linked__reabon{
+.linked__ribbon{
     text-decoration: none;
     font-size: small;
     text-align: center;
     color: #1c5020;
     outline: none;
     filter: grayscale(1) opacity(0.7);
-    font-weight: bold;
+    /* font-weight: bold; */
     transition: 200ms;
 }
-.reabon__list--item:hover{
+.ribbon__list--item:hover{
     background-color: rgb(250, 250, 250)
 }
-.reabon__list--item:hover .linked__reabon, .linked__reabon:hover{
+.ribbon__list--item:hover .linked__ribbon, .linked__ribbon:hover{
     text-decoration: underline;
     filter: grayscale(0) opacity(1);
     background-color: rgb(250, 250, 250);
+}
+
+/* ribbon menu *****************************************************************************************/
+.ribbon__list--item  .user__nav{
+    text-align: center;
+    width: 100%;
+    height: 100%;
+}
+
+.user__nav--logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+}
+
+.user__nav--logo .icon{
+    width: 45px;
+    height: 45px;
+}
+
+.user__nav--logo .title{
+    font-size: small;
+    color: #1c5020;
+    outline: none;
+    filter: grayscale(1) opacity(0.7);
+    transition: 200ms;
+}
+.ribbon__list--item:hover .user__nav--logo .title, .user__nav--logo .title:hover{
+    text-decoration: underline;
+    filter: grayscale(0) opacity(1);
+    background-color: rgb(250, 250, 250);
+}
+.user__nav .user__nav--block{
+    display: none;
+    list-style: none;
+    padding: 20px;
+    margin: 5px 0px 0px -70px;
+    width: 100px;
+    position: absolute;
+    text-align: end;
+    box-shadow: 0px 2px 3px 1px rgba(0,0,0,0.18);
+    border-radius: 5px;
+}
+.user__nav .user__nav--block .nav__block--item{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+}
+
+
+.user__nav .user__nav--block .nav__block--item .linked__ribbon--menu{
+    text-decoration: none;
+    font-size: small;
+    padding: 5px;
+    color: #1c5020;
+    outline: none;
+    filter: grayscale(1) opacity(0.7);
+    transition: 200ms;
+    width: 100%;
+    height: 100%;
+}
+.nav__block--item:hover{
+    text-decoration: underline;
+    color: #1c5020;
+    filter: grayscale(0) opacity(1);
+
+}
+.linked__ribbon--menu:hover{
+    filter: grayscale(0) opacity(1);
+    background-color: rgb(250, 250, 250);
+    text-align: end;
+}
+
+.ribbon__list--item:hover .user__nav--block, .user__nav--block:hover{
+    display: block;
 }
 
 
@@ -179,7 +261,7 @@
     font-weight: bold;
 }
 
-.errer__alert-ficha-tecnica{
+.error__alert-ficha-tecnica{
     padding: 20px 0 0 0;
     font-size: 12px;
     color: #6f6f6f;
@@ -206,14 +288,15 @@
 .form__container{
     border: 2px solid #dfdfdf;
     width: 35%;
-    height: 450px;
+    min-height: 450px;
     margin: 0px auto;
-    border-radius: 40px;
+    border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     max-width: 380px;
+    padding: 50px 0px;
 }
 
 .form__container:hover{
@@ -248,7 +331,7 @@
 .container__session-item > label{
     font-size: small;
     color: #6f6f6f;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 
 .container__session-item > input{
@@ -396,10 +479,10 @@
         padding: 10px 0;
         min-height: 50px;
     }
-    .reabon{
+    .ribbon{
         width: 95%;
     }
-    .reabon .reabon__list{
+    .ribbon .ribbon__list{
         justify-content: center;
     }
     .copy{
