@@ -104,7 +104,8 @@
 /* Content ***********************************************************************************/
 
 .container{
-    background-color: #dfdfdf;
+    /* background-color: #dfdfdf; */
+    background-color: #f7f7fa;
 }
 
 .container .content{
@@ -114,6 +115,10 @@
     margin: 0 auto;
     text-align: center;
     padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
 }
 
 .ribbon{
@@ -286,7 +291,8 @@
 
 /* Login ************************************************************************************/
 .form__container{
-    border: 2px solid #dfdfdf;
+    /* border: 2px solid #dfdfdf; */
+    border: 2px solid #f7f7fa;
     width: 35%;
     min-height: 450px;
     margin: 0px auto;
@@ -349,6 +355,7 @@
     width: 100%;
     height: 40px;
     background-color: #dfdfdf;
+    /* background-color: #f7f7fa; */
     color: black;
     border-radius: 20px;
     margin: 10px 0;
@@ -359,25 +366,29 @@
 .footer__container{
     margin: 0px;
     padding: 20px;
-    background-color: #dfdfdf;
+    /* background-color: #dfdfdf; */
+    background-color: #f7f7fa;
 }
 
 .footer{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #dfdfdf;
+    /* background-color: #dfdfdf; */
+    background-color: #f7f7fa;
 }
 
 .copy{
-    background-color: #dfdfdf;
+    /* background-color: #dfdfdf; */
+    background-color: #f7f7fa;
     color: black;
     font-size: small;
 }
 .copy a{
     font-weight: bold;
     text-decoration: none;
-    background-color: #dfdfdf;
+    /* background-color: #dfdfdf; */
+    background-color: #f7f7fa;
 }
 
 .copy a:hover{
@@ -426,6 +437,100 @@
     color: rgb(124, 2, 2);
 }
 
+.bienvenida{
+    margin: 0 0 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* Account ***********************************************************************/
+.current__user-info{
+    width: 80%;
+    min-height: 100px;
+    box-shadow: 0px 1px 2px 1px rgba(0,0,0,0.18);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.user__info-tittle{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.user__info-details{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.user__info-photo{
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+}
+
+.user__info-data{
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.user__info-data .user__info-macro{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.user__info-data .user__info-macro .info__title{
+    color: #6f6f6f;
+    margin-right: 10px;
+    width: 82px;
+    text-align: right;
+}
+
+/* Searching Users ********************************************************************/
+
+.currents__users{
+    width: 80%;
+    min-height: 100px;
+    box-shadow: 0px 1px 2px 1px rgba(0,0,0,0.18);
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.currents__users-table{
+    margin:  0 auto;
+}
+
+.users__table-item{
+    background-color: #dfdfdf;
+    /* background-color: #f7f7fa; */
+    width: 150px;
+    padding: 5px 2px;
+}
+.vinculo{
+    text-decoration: none;
+}
+.vinculo:hover{
+    text-decoration: underline;
+}
+
+.table__title{
+    padding: 5px 0 15px 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Media *************************************************************************************/
 @media(max-width: 1100px){
     .form__container{
         border: none;
@@ -442,6 +547,14 @@
     .container .content{
         min-height: 50px;
     }
+    .user__info-details{
+        flex-direction: column;
+    }
+    .current__user-info{
+        box-shadow: none;
+        overflow: hidden;
+    }
+
 }
 @media(max-width: 450px){
 
@@ -487,5 +600,22 @@
     }
     .copy{
         text-align: center;
+    }
+    .info__data{
+        max-width: 150px;
+        overflow: hidden;
+    }
+    .users__table-item{
+        width: 80px;
+        font-size: small;
+    }
+    #last{
+        display: none;
+    }
+    .vinculo{
+        font-size: small;
+    }
+    .item{
+        font-size: small;
     }
 }

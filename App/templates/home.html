@@ -9,8 +9,14 @@
 
 {% block content%}
     {% if userIp %}
-        <h1>Hola {{ username | capitalize }}, Bienvenido a Asbama</h1>
-        <img class="logo" src="{{ url_for('static', filename='images/asbama.jpg') }}" alt="Asbama Logo">
+        <div class="bienvenida">
+            <h1>Hola {{ username | capitalize }}, Bienvenido a</h1>
+            <img class="logo" src="{{ url_for('static', filename='images/asbama.jpg') }}" alt="Asbama Logo">
+        </div>
+        <!-- {{ macros.render_userDataBlock(current_user) }} -->
+        <div class="current__user-ingresos">
+
+        </div>
     {% else %}
         <a href="{{ url_for('index') }}"> Algo ha salido mal, Reload </a>
     {% endif %}

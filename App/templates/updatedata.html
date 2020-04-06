@@ -1,0 +1,42 @@
+{% extends "base.html"  %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}
+    {{super()}}
+    Update
+{% endblock %}
+
+{% block content%}
+    {% if userIp and current_user.role == 'Administrador' %}
+        <div class="form__container">
+            <img class="logo" src="{{ url_for('static', filename='images/asbama.jpg') }}" alt="Asbama Logo">
+            <form action="{{ url_for('auth.updateData') }}" method="POST" class="form__container-session" role="form">
+                <div class="container__session-item">
+                    {{ updatedata.password.label }}
+                    {{ updatedata.password }}
+                </div>
+                <div class="container__session-item">
+                    {{ updatedata.correo.label }}
+                    {{ updatedata.correo }}
+                </div>
+                <div class="container__session-item">
+                    {{ updatedata.nombre.label }}
+                    {{ updatedata.nombre }}
+                </div>
+                <div class="container__session-item">
+                    {{ updatedata.role.label }}
+                    {{ updatedata.role }}
+                </div>
+                <div class="container__session-item">
+                    {{ updatedata.username.label }}
+                    {{ updatedata.username }}
+                </div>
+                <div class="container__session-submit">
+                    {{ updatedata.submit }}
+                </div>
+            </form>
+        </div>
+    {% else %}
+        <a href="{{ url_for('home') }}"> Algo ha salido mal, Reload </a>
+    {% endif %}
+{% endblock %}

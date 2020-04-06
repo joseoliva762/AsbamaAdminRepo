@@ -20,3 +20,19 @@ class ChangePassword(FlaskForm):
     password = PasswordField('Password: ', validators=[DataRequired()])
     confirmPassword = PasswordField('confirmar: ', validators=[DataRequired()])
     submit = SubmitField('Cambiar')
+
+class UpdateData(FlaskForm):
+    correo = StringField('Correo: ')
+    nombre = StringField('Nombre: ')
+    role = StringField('Rol: ')
+    username = StringField('Username: ')
+    password = PasswordField('Confirmar Password: ', validators=[DataRequired()])
+    submit = SubmitField('Actualizar')
+
+class UpdateExternalData(FlaskForm):
+    correo = StringField('Correo: ')
+    nombre = StringField('Nombre: ')
+    role = StringField('Rol: ', validators=[DataRequired()])
+    username = StringField('Username: ')
+    password = PasswordField('Confirmar Password: ', validators=[DataRequired()])
+    submit = SubmitField('Actualizar')

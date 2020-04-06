@@ -1,8 +1,8 @@
 from . import auth
-from App.forms import LoginForm, SignupForm, ChangePassword
+from App.forms import LoginForm, SignupForm, ChangePassword, UpdateData, UpdateExternalData
 from flask_login import login_user, login_required, logout_user
 from flask import render_template, redirect, url_for, flash, request, session, make_response
-from App.firestoreService import getUser, getNewId, getUserById, putUser, updatePassword
+from App.firestoreService import getUser, getNewId, getUserById, putUser, updatePassword, updateUserData, updateExternalUserData
 from App.model import UserData, UserModel
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
@@ -22,7 +22,7 @@ def login():
         #session['username'] =  login.username.data#request.form.get('username')
         password = login.password.data
         userDoc = getUser(username)
-        if userDoc.to_dict() is not None:
+        if userDoc is not None:
             passwordFromDb = userDoc.to_dict()['password']
             if check_password_hash(pwhash=passwordFromDb, password=password):
                 userData = UserData(
@@ -95,6 +95,7 @@ def changePassword():
         password = changePassword.password.data
         confirmPassword = changePassword.confirmPassword.data
         user = getUser(username)
+        print(user.id)
         if(check_password_hash(user.to_dict()['password'], currentPassword)):
             if(password == confirmPassword):
                 if(currentPassword != password):
@@ -111,6 +112,61 @@ def changePassword():
         else:
             flash('la contraseña actual no coincide.', 'error')
     return render_template('changepassword.html', **context)
+
+@auth.route('/updatedata', methods=['GET', 'POST'])
+@login_required
+def updateData():
+    userIp = session.get('userIp')
+    username = session.get('username')
+    flash('Actualizar Informacion de {}.'.format(username.title()))
+    updateData = UpdateData()
+    context =  {
+        'userIp': userIp,
+        'updatedata': updateData
+    }
+    if(updateData.is_submitted()):
+        user = getUser(username)
+        password = updateData.password.data
+        if(check_password_hash(user.to_dict()['password'], password)):
+            correo = validarData(updateData.correo.data, user.to_dict()['correo'])
+            nombre = validarData(updateData.nombre.data, user.to_dict()['nombre'])
+            role = validarData(updateData.role.data, user.to_dict()['role'])
+            newUsername = validarData(updateData.username.data, user.to_dict()['username'])
+            updateUserData(user, correo,nombre,role,newUsername)
+            flash('Actualizacion realizada con Exito.')
+            return redirect(url_for('account'))
+        else:
+            flash('Contraseña Invalida.', 'error')
+
+    return render_template('updatedata.html', **context)
+
+def validarData(passData, CurrentData):
+    if(passData == ''):
+        return CurrentData
+    return passData
+
+@auth.route('/updateexternaldata/<string:username>', methods=['GET', 'POST'])
+@login_required
+def updateExternalData(username=None):
+    userIp = session.get('userIp')
+    flash('Actualizar Informacion de {}.'.format(username.title()))
+    updateExternalData = UpdateExternalData()
+    context =  {
+        'userIp': userIp,
+        'updateexternaldata': updateExternalData,
+        'username': username
+    }
+    if(updateExternalData.is_submitted()):
+        user = getUser(username)
+        password = updateExternalData.password.data
+        if(check_password_hash(user.to_dict()['password'], password)):
+            role = validarData(updateExternalData.role.data, user.to_dict()['role'])
+            updateExternalUserData(user, role)
+            flash('Actualizacion realizada con Exito.')
+            return redirect(url_for('userData'))
+        else:
+            flash('Contraseña Invalida.', 'error')
+    return render_template('updateexternaldata.html', **context)
 
 
 @auth.route('/logout')

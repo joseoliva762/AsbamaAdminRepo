@@ -1,0 +1,19 @@
+{% extends "base.html"  %}
+{% import "macros.html" as macros %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}
+    {{super()}}
+    {{ current_user.username }}
+{% endblock %}
+
+{% block content%}
+    {% if userIp %}
+    {{ macros.render_userDataBlock(current_user) }}
+        <div class="current__user-ingresos">
+
+        </div>
+    {% else %}
+        <a href="{{ url_for('home') }}"> Algo ha salido mal, Reload </a>
+    {% endif %}
+{% endblock %}

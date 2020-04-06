@@ -43,3 +43,18 @@ def updatePassword(user, password):
     userRef.update({
         'password': password,
     })
+
+def updateUserData(user, correo, nombre, role, username):
+    userRef = db.collection('users').document(user.id)
+    userRef.update({
+        'correo': correo,
+        'nombre': nombre,
+        'role': role,
+        'username': username
+    })
+
+def updateExternalUserData(user, role):
+    userRef = db.collection('users').document(user.id)
+    userRef.update({
+        'role': role
+    })

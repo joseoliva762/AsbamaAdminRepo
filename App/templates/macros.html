@@ -21,3 +21,59 @@
         </div>
     {% endif %}
 {% endmacro %}
+
+{% macro render_userData(title, info) %}
+    <div class="user__info-macro">
+        <p class="info__title"> {{ title }}:   </p>
+        <p class="info__data">{{ info }}</p>
+    </div>
+{% endmacro %}
+
+{% macro render_userDataBlock(user) %}
+    <div class="current__user-info">
+        <h2 class="user__info-tittle">
+            Información del usuario
+        </h2>
+        <div class="user__info-details">
+            <img class="user__info-photo" src="{{ url_for('static', filename='images/profile.jpg') }}" alt="{{user.username }}">
+            <div class="user__info-data">
+                {{ render_userData('Correo', user.correo) }}
+                {{ render_userData('Username', user.username) }}
+                {{ render_userData('Nombre', user.nombre) }}
+                {{ render_userData('Role', user.role) }}
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro render_externalUserDataBlock(user) %}
+    <div class="current__user-info">
+        <h2 class="user__info-tittle">
+            Información del usuario
+        </h2>
+        <div class="user__info-details">
+            <img class="user__info-photo" src="{{ url_for('static', filename='images/profile.jpg') }}" alt="{{user.username }}">
+            <div class="user__info-data">
+                {{ render_userData('Correo', user.to_dict().correo) }}
+                {{ render_userData('Username', user.to_dict().username) }}
+                {{ render_userData('Nombre', user.to_dict().nombre) }}
+                {{ render_userData('Role', user.to_dict().role) }}
+            </div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro render_userTableData(users) %}
+    {% for user in users %}
+        <tr class="users__table-row">
+            <th>
+                <a class="vinculo" href="{{ url_for('externalUserData', username=user.to_dict()['username']) }}">
+                    {{ user.to_dict()['username'].title() }}
+                </a>
+            </th>
+            <td class="item">{{ user.to_dict()['role'] }}</td>
+            <td class="item">{{ user.to_dict()['nombre'] }}</td>
+            <td class="item" id="last">Ayer</td>
+        </tr>
+    {% endfor %}
+{% endmacro %}

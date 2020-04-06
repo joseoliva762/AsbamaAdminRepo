@@ -2,7 +2,7 @@ from flask import request, make_response, redirect, render_template, session, ur
 from flask_bootstrap import Bootstrap
 from flask_login import login_required
 from App.forms import LoginForm
-from App.firestoreService import getUsers, getUserRegisters
+from App.firestoreService import getUsers, getUserRegisters,getUser
 import unittest
 
 from App import createApp
@@ -57,3 +57,36 @@ def home():
         'userIp': userIp
     }
     return render_template('home.html', **context)
+
+@app.route('/account', methods=['GET'])
+@login_required
+def account():
+    userIp = session.get('userIp')
+    context = {
+        'userIp': userIp,
+        'update': 1
+    }
+    return render_template('account.html', **context)
+
+@app.route('/usersdata', methods=['GET'])
+@login_required
+def userData():
+    users =getUsers()
+    userIp = session.get('userIp')
+    context = {
+        'userIp': userIp,
+        'users': users
+    }
+    return render_template('userdata.html', **context)
+
+@app.route('/externaluserdata/<string:username>', methods=['GET'])
+@login_required
+def externalUserData(username=None):
+    userIp = session.get('userIp')
+    user = getUser(username)
+    context = {
+        'userIp': userIp,
+        'user': user,
+        'update': 2
+    }
+    return render_template('externaluserdata.html', **context)
