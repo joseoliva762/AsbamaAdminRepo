@@ -175,3 +175,5 @@ def logout():
     logout_user()
     flash("Sesion Cerrada.")
     return redirect( url_for('auth.login'))
+
+# https://meet.jit.si/RevisionInterfazAdministrativa
