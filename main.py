@@ -2,7 +2,7 @@ from flask import request, make_response, redirect, render_template, session, ur
 from flask_bootstrap import Bootstrap
 from flask_login import login_required
 from App.forms import LoginForm
-from App.firestoreService import getUsers, getUserRegisters,getUser
+from App.firestoreService import getUsers, getUserRegisters, getUser, getPhones, getPhonesByAdmin
 import unittest
 
 from App import createApp
@@ -68,17 +68,6 @@ def account():
     }
     return render_template('account.html', **context)
 
-@app.route('/usersdata', methods=['GET'])
-@login_required
-def userData():
-    users =getUsers()
-    userIp = session.get('userIp')
-    context = {
-        'userIp': userIp,
-        'users': users
-    }
-    return render_template('userdata.html', **context)
-
 @app.route('/externaluserdata/<string:username>', methods=['GET'])
 @login_required
 def externalUserData(username=None):
@@ -90,3 +79,15 @@ def externalUserData(username=None):
         'update': 2
     }
     return render_template('externaluserdata.html', **context)
+
+@app.route('/telefonos')
+@login_required
+def telefonos():
+    userIp = session.get('userIp')
+    telefonos = getPhones()
+    phonesByAdmins = getPhonesByAdmin(telefonos)
+    context = {
+        'userIp': userIp,
+        'phones': phonesByAdmins
+    }
+    return render_template('telefonos.html', **context)

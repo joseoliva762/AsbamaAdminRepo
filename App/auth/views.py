@@ -31,7 +31,11 @@ def login():
                     id=userDoc.id,
                     correo=userDoc.to_dict()['correo'],
                     nombre=userDoc.to_dict()['nombre'],
-                    role=userDoc.to_dict()['role']
+                    role=userDoc.to_dict()['role'],
+                    imagen=userDoc.to_dict()['imagen'],
+                    telefono=userDoc.to_dict()['telefono'],
+                    access=userDoc.to_dict()['access'],
+                    fechadeactualizacion=userDoc.to_dict()['fechadeactualizacion']
                 )
                 user = UserModel(userData)
                 login_user(user)
@@ -56,6 +60,8 @@ def signup():
         'signup': signup
     }
     if ( signup.is_submitted() ):
+        imagen = signup.imagen.data
+        telefono = signup.telefono.data
         correo = signup.correo.data
         nombre = signup.nombre.data
         role = signup.role.data
@@ -64,7 +70,7 @@ def signup():
         id = str(getNewId())
         if (getUser(username) is None):
             passwordHash = generate_password_hash(password)
-            userData = UserData(username, passwordHash, id, correo, nombre, role)
+            userData = UserData(username, passwordHash, id, correo, nombre, role, imagen, telefono)
             putUser(userData)
             user = UserModel(userData)
             if(getUser(user.username) is not None):
@@ -132,7 +138,9 @@ def updateData():
             nombre = validarData(updateData.nombre.data, user.to_dict()['nombre'])
             role = validarData(updateData.role.data, user.to_dict()['role'])
             newUsername = validarData(updateData.username.data, user.to_dict()['username'])
-            updateUserData(user, correo,nombre,role,newUsername)
+            imagen = validarData(updateData.imagen.data, user.to_dict()['imagen'])
+            telefono = validarData(updateData.telefono.data, user.to_dict()['telefono'])
+            updateUserData(user, correo,nombre,role,newUsername, imagen, telefono, user.to_dict()['telefono'])
             flash('Actualizacion realizada con Exito.')
             return redirect(url_for('account'))
         else:
@@ -163,7 +171,7 @@ def updateExternalData(username=None):
             role = validarData(updateExternalData.role.data, user.to_dict()['role'])
             updateExternalUserData(user, role)
             flash('Actualizacion realizada con Exito.')
-            return redirect(url_for('userData'))
+            return redirect(url_for('users.userData'))
         else:
             flash('Contraseña Invalida.', 'error')
     return render_template('updateexternaldata.html', **context)

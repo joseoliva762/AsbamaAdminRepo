@@ -2,6 +2,9 @@
     <div class="ribbon">
         <ul class="ribbon__list">
             {% if current_user.role == 'Administrador' %}
+                <li class="ribbon__list--item">
+                    <a href="{{ url_for('telefonos') }}" class="linked__ribbon">Telefonos</a>
+                </li>
                 {% if update == 1%}
                 <li class="ribbon__list--item">
                     <a href="{{ url_for('auth.updateData') }}" class="linked__ribbon">Actualizar</a>
@@ -13,7 +16,7 @@
                 </li>
                 {% endif %}
                 <li class="ribbon__list--item">
-                    <a href="{{ url_for('userData') }}" class="linked__ribbon">Usuarios</a>
+                    <a href="{{ url_for('users.userData') }}" class="linked__ribbon">Usuarios</a>
                 </li>
                 <li class="ribbon__list--item">
                     <a href="{{ url_for('auth.signup') }}" class="linked__ribbon">Sign Up</a>

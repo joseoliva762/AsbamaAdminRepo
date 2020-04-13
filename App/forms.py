@@ -8,6 +8,8 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 class SignupForm(FlaskForm):
+    imagen = StringField('Imagen URL: ')
+    telefono = StringField('Telefono: ', validators=[DataRequired()])
     correo = StringField('Correo: ', validators=[DataRequired()])
     nombre = StringField('Nombre: ', validators=[DataRequired()])
     role = StringField('Rol: ', validators=[DataRequired()])
@@ -22,6 +24,8 @@ class ChangePassword(FlaskForm):
     submit = SubmitField('Cambiar')
 
 class UpdateData(FlaskForm):
+    imagen = StringField('Imagen URL: ')
+    telefono = StringField('Telefono: ')
     correo = StringField('Correo: ')
     nombre = StringField('Nombre: ')
     role = StringField('Rol: ')
@@ -30,6 +34,8 @@ class UpdateData(FlaskForm):
     submit = SubmitField('Actualizar')
 
 class UpdateExternalData(FlaskForm):
+    imagen = StringField('Imagen URL: ')
+    telefono = StringField('Telefono: ')
     correo = StringField('Correo: ')
     nombre = StringField('Nombre: ')
     role = StringField('Rol: ', validators=[DataRequired()])

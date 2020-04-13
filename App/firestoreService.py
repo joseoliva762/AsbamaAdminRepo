@@ -2,6 +2,15 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 import uuid
+from datetime import datetime
+# from App.model import PhoneModel
+
+class PhoneModel():
+    def __init__(self, user,telefono, role, update):
+        self.user = user
+        self.telefono = telefono
+        self.role = role
+        self.update = update
 
 if (not len(firebase_admin._apps)):
     credential = credentials.ApplicationDefault()
@@ -32,8 +41,19 @@ def putUser(userData):
         'password': userData.password,
         'correo': userData.correo,
         'nombre': userData.nombre,
-        'role': userData.role
+        'role': userData.role,
+        'imagen': userData.imagen,
+        'telefono': userData.telefono,
+        'access': 'undefined',
+        'fechadecreacion': datetime.now(),
+        'fechadeactualizacion': datetime.now()
         })
+    telefonosRef = db.collection('telefonos').document(str(getNewId()))
+    telefonosRef.set({
+        'telefono': userData.telefono,
+        'user': userData.id,
+        'fechadeactualizacion': datetime.now()
+    })
 
 def getNewId():
     return uuid.uuid1()
@@ -44,17 +64,40 @@ def updatePassword(user, password):
         'password': password,
     })
 
-def updateUserData(user, correo, nombre, role, username):
+def updateUserData(user, correo, nombre, role, username, imagen, telefono, lastPhone ):
     userRef = db.collection('users').document(user.id)
     userRef.update({
         'correo': correo,
         'nombre': nombre,
         'role': role,
-        'username': username
+        'username': username,
+        'telefono': telefono,
+        'imagen': imagen,
+        'fechadeactualizacion': datetime.now()
     })
-
+    if(telefono != lastPhone):
+        phoneRef = db.collection('telefonos').document(str(updatePhonesByUserId(user.id).id))
+        phoneRef.update({
+            'telefono': telefono
+        })
 def updateExternalUserData(user, role):
     userRef = db.collection('users').document(user.id)
     userRef.update({
         'role': role
     })
+
+def updatePhonesByUserId(userId):
+    telefonos = db.collection('telefonos').where('user', '==', userId).get()
+    for telefono in telefonos:
+        return telefono
+
+def getPhones():
+    return db.collection('telefonos').get()
+
+def getPhonesByAdmin(phones):
+    phoneTemplateData = list()
+    for phone in phones:
+        user = getUserById(phone.to_dict()['user'])
+        model = PhoneModel(user, phone.to_dict()['telefono'], user.to_dict()['role'], phone.to_dict()['fechadeactualizacion'])
+        phoneTemplateData.append(model) 
+    return phoneTemplateData

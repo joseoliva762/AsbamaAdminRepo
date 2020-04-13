@@ -2,6 +2,7 @@ from flask import Flask
 from flask_bootstrap import Bootstrap
 from .config import Config
 from .auth import auth
+from .users import users
 from flask_login import  LoginManager
 from .model import UserModel
 
@@ -19,4 +20,5 @@ def createApp():
     app.config.from_object(Config)
     loginManager.init_app(app)
     app.register_blueprint(auth)
+    app.register_blueprint(users)
     return app

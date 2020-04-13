@@ -35,12 +35,20 @@
             Información del usuario
         </h2>
         <div class="user__info-details">
-            <img class="user__info-photo" src="{{ url_for('static', filename='images/profile.jpg') }}" alt="{{user.username }}">
+            <div class="user__info-image-container">
+                {% if user.imagen != '' %}
+                    <img class="user__info-photo" src="{{ user.imagen }}" alt="">
+                {% else %}
+                    <img class="user__info-photo" src="{{ url_for('static', filename='images/profile.jpg') }}" alt="">
+                {% endif %}
+            </div>
             <div class="user__info-data">
                 {{ render_userData('Correo', user.correo) }}
                 {{ render_userData('Username', user.username) }}
                 {{ render_userData('Nombre', user.nombre) }}
                 {{ render_userData('Role', user.role) }}
+                {{ render_userData('Telefono', user.telefono) }}
+                {{ render_userData('RFID', user.access) }}
             </div>
         </div>
     </div>
@@ -52,12 +60,18 @@
             Información del usuario
         </h2>
         <div class="user__info-details">
-            <img class="user__info-photo" src="{{ url_for('static', filename='images/profile.jpg') }}" alt="{{user.username }}">
+            {% if user.to_dict().imagen != '' %}
+                <img class="user__info-photo" src="{{ user.to_dict().imagen }}" alt="">
+            {% else %}
+                <img class="user__info-photo" src="{{ url_for('static', filename='images/profile.jpg') }}" alt="">
+            {% endif %}
             <div class="user__info-data">
                 {{ render_userData('Correo', user.to_dict().correo) }}
                 {{ render_userData('Username', user.to_dict().username) }}
                 {{ render_userData('Nombre', user.to_dict().nombre) }}
                 {{ render_userData('Role', user.to_dict().role) }}
+                {{ render_userData('Telefono', user.to_dict().telefono) }}
+                {{ render_userData('RFID', user.to_dict().access) }}
             </div>
         </div>
     </div>
@@ -67,13 +81,30 @@
     {% for user in users %}
         <tr class="users__table-row">
             <th>
-                <a class="vinculo" href="{{ url_for('externalUserData', username=user.to_dict()['username']) }}">
+                <a class="vinculo" href="{{ url_for('users.externalUserData', username=user.to_dict()['username']) }}">
                     {{ user.to_dict()['username'].title() }}
                 </a>
             </th>
             <td class="item">{{ user.to_dict()['role'] }}</td>
             <td class="item">{{ user.to_dict()['nombre'] }}</td>
-            <td class="item" id="last">Ayer</td>
+            <td class="item" id="last">{{ user.to_dict()['telefono'] }}</td>
+        </tr>
+    {% endfor %}
+{% endmacro %}
+
+{% macro render_phonesTableData(phones, aceptedRole) %}
+    {% for phone in phones %}
+        {% if phone.role == aceptedRole %}
+        <tr class="users__table-row">
+            <th>
+                <a class="vinculo" href="{{ url_for('users.externalUserData', username=phone.user.to_dict()['username']) }}">
+                    {{ phone.user.to_dict()['username'].title() }}
+                </a>
+            </th>
+            <td class="item">{{ phone.telefono }}</td>
+            <td class="item">{{ phone.role}}</td>
+            <td class="item" id="last">{{ phone.update }}</td>
+        {% endif %}
         </tr>
     {% endfor %}
 {% endmacro %}
