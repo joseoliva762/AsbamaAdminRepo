@@ -1,0 +1,44 @@
+{% extends "base.html"  %}
+{% import "macros.html" as macros %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}
+    {{super()}}
+    Telefonos
+{% endblock %}
+
+{% block content%}
+    {% if userIp and current_user.role == 'Administrador' %}
+        <div class="current__user-info">
+            <div class="table__title">
+                Telefonos para Emergencias de Administradores
+            </div>
+            <table class="currents__users-table">
+                <tr class="users__table-master">
+                    <th class="users__table-item">User</th>
+                    <th class="users__table-item">Telefono</th>
+                    <th class="users__table-item">Rol</th>
+                    <th class="users__table-item" id="last">Actualizacion</th>
+                </tr>
+                {{ macros. render_phonesTableData(phones, 'Administrador') }}
+            </table>
+        </div>
+
+        <div class="current__user-info">
+            <div class="table__title">
+                Telefonos de Operarios
+            </div>
+            <table class="currents__users-table">
+                <tr class="users__table-master">
+                    <th class="users__table-item">User</th>
+                    <th class="users__table-item">Telefono</th>
+                    <th class="users__table-item">Rol</th>
+                    <th class="users__table-item" id="last">Actualizacion</th>
+                </tr>
+                {{ macros. render_phonesTableData(phones, 'Operario') }}
+            </table>
+        </div>
+    {% else %}
+        <a href="{{ url_for('home') }}"> Algo ha salido mal, Reload </a>
+    {% endif %}
+{% endblock %}
