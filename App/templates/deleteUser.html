@@ -1,0 +1,26 @@
+{% extends "base.html"  %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}
+    {{super()}}
+    Borrar Usuario
+{% endblock %}
+
+{% block content%}
+    {% if userIp %}
+        <div class="form__container">
+            <img class="logo" src="{{ url_for('static', filename='images/asbama.jpg') }}" alt="Asbama Logo">
+            <form action="{{ url_for('users.deleteUser', username=user.to_dict()['username']) }}" method="POST" class="form__container-session" role="form">
+                <div class="container__session-item">
+                    {{ delete.password.label }}
+                    {{ delete.password }}
+                </div>
+                <div class="container__session-submit">
+                    {{ delete.submit }}
+                </div>
+            </form>
+        </div>
+    {% else %}
+        <a href="{{ url_for('index') }}"> Algo ha salido mal, Reload </a>
+    {% endif %}
+{% endblock %}

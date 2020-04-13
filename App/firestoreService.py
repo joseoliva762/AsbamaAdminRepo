@@ -34,6 +34,19 @@ def getUser(username):
 def getUserById(userId):
     return db.collection('users').document(userId).get()
 
+def deleteUserFromDb(userId):
+    userRef = db.collection('users').document(userId)
+    userRef.delete()
+
+def getPhoneByUserId(userId):
+    phones = db.collection('telefonos').where('user', '==', userId).get()
+    for phone in phones:
+        return phone
+
+def deleteFromPhones(phoneId):
+    phoneRef = db.collection('telefonos').document(str(phoneId))
+    phoneRef.delete()
+
 def putUser(userData):
     userRef = db.collection('users').document(userData.id)
     userRef.set({
@@ -46,7 +59,8 @@ def putUser(userData):
         'telefono': userData.telefono,
         'access': 'undefined',
         'fechadecreacion': datetime.now(),
-        'fechadeactualizacion': datetime.now()
+        'fechadeactualizacion': datetime.now(),
+        'status': True
         })
     telefonosRef = db.collection('telefonos').document(str(getNewId()))
     telefonosRef.set({
@@ -101,3 +115,4 @@ def getPhonesByAdmin(phones):
         model = PhoneModel(user, phone.to_dict()['telefono'], user.to_dict()['role'], phone.to_dict()['fechadeactualizacion'])
         phoneTemplateData.append(model) 
     return phoneTemplateData
+

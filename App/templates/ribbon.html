@@ -6,14 +6,17 @@
                     <a href="{{ url_for('telefonos') }}" class="linked__ribbon">Telefonos</a>
                 </li>
                 {% if update == 1%}
-                <li class="ribbon__list--item">
-                    <a href="{{ url_for('auth.updateData') }}" class="linked__ribbon">Actualizar</a>
-                </li>
+                    <li class="ribbon__list--item">
+                        <a href="{{ url_for('auth.updateData') }}" class="linked__ribbon">Actualizar</a>
+                    </li>
                 {% endif %}
                 {% if update == 2 %}
-                <li class="ribbon__list--item">
-                    <a href="{{ url_for('auth.updateExternalData', username=user.to_dict()['username']) }}" class="linked__ribbon">Actualizar Rol</a>
-                </li>
+                    <li class="ribbon__list--item">
+                        <a href="{{ url_for('auth.updateExternalData', username=user.to_dict()['username']) }}" class="linked__ribbon">Actualizar Rol</a>
+                    </li>
+                    <li class="ribbon__list--item">
+                        <a href="{{ url_for('users.deleteUser', username=user.to_dict()['username']) }}" class="linked__ribbon">Borrar Usuario</a>
+                    </li>
                 {% endif %}
                 <li class="ribbon__list--item">
                     <a href="{{ url_for('users.userData') }}" class="linked__ribbon">Usuarios</a>

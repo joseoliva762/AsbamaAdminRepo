@@ -1,8 +1,8 @@
 from . import users
-from App.forms import LoginForm, SignupForm, ChangePassword, UpdateData, UpdateExternalData
+from App.forms import LoginForm, SignupForm, ChangePassword, UpdateData, UpdateExternalData, DeleteUser
 from flask_login import login_user, login_required, logout_user
 from flask import render_template, redirect, url_for, flash, request, session, make_response
-from App.firestoreService import getUsers, getUser, getNewId, getUserById, putUser, updatePassword, updateUserData, updateExternalUserData
+from App.firestoreService import getUsers, getUser, getNewId, getUserById, putUser, updatePassword, updateUserData, updateExternalUserData, deleteUserFromDb, deleteFromPhones,getPhoneByUserId
 from App.model import UserData, UserModel
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
@@ -29,3 +29,32 @@ def externalUserData(username=None):
         'update': 2
     }
     return render_template('externaluserdata.html', **context)
+
+@users.route('/delete/<string:username>', methods=['GET',  'POST'])
+@login_required
+def deleteUser(username=None):
+    userIp = session.get('userIp')
+    user = getUser(username)
+    delete = DeleteUser()
+    context = {
+        'userIp': userIp,
+        'user': user,
+        'update': 2,
+        'delete': delete
+    }
+    if(delete.is_submitted()):
+        user = getUser(username)
+        currentPassword = delete.password.data
+        if(check_password_hash(user.to_dict()['password'], currentPassword)):
+            flash('El usuario {} fue borrado Exitosamente.'.format(username))
+            phoneDb = getPhoneByUserId(user.id)
+            deleteFromPhones(phoneDb.id)
+            #print('>>>', phoneDb.to_dict()['telefono'])
+            deleteUserFromDb(user.id)
+            return redirect(url_for('home'))
+        else:
+            flash('la contraseña actual no coincide.', 'error')
+    else:
+        flash('Seguro que desea eliminar al usuario {}'.format(username))
+    return render_template('deleteUser.html', **context)
+    #return redirect(url_for('home'))

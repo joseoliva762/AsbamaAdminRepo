@@ -36,10 +36,10 @@
         </h2>
         <div class="user__info-details">
             <div class="user__info-image-container">
-                {% if user.imagen != '' %}
-                    <img class="user__info-photo" src="{{ user.imagen }}" alt="">
+                {% if user.imagen != ' ' %}
+                    <img class="user__info-photo" src="{{ user.imagen }}" alt=" ">
                 {% else %}
-                    <img class="user__info-photo" src="{{ url_for('static', filename='images/profile.jpg') }}" alt="">
+                    <img class="user__info-photo" src="{{ url_for('static', filename='images/profile.jpg') }}" alt=" ">
                 {% endif %}
             </div>
             <div class="user__info-data">
@@ -60,10 +60,10 @@
             Información del usuario
         </h2>
         <div class="user__info-details">
-            {% if user.to_dict().imagen != '' %}
-                <img class="user__info-photo" src="{{ user.to_dict().imagen }}" alt="">
+            {% if user.to_dict().imagen != ' ' %}
+                <img class="user__info-photo" src="{{ user.to_dict().imagen }}" alt=" ">
             {% else %}
-                <img class="user__info-photo" src="{{ url_for('static', filename='images/profile.jpg') }}" alt="">
+                <img class="user__info-photo" src="{{ url_for('static', filename='images/profile.jpg') }}" alt=" ">
             {% endif %}
             <div class="user__info-data">
                 {{ render_userData('Correo', user.to_dict().correo) }}
@@ -86,7 +86,7 @@
                 </a>
             </th>
             <td class="item">{{ user.to_dict()['role'] }}</td>
-            <td class="item">{{ user.to_dict()['nombre'] }}</td>
+            <td class="item" >{{ user.to_dict()['nombre'] }}</td>
             <td class="item" id="last">{{ user.to_dict()['telefono'] }}</td>
         </tr>
     {% endfor %}
@@ -102,7 +102,7 @@
                 </a>
             </th>
             <td class="item">{{ phone.telefono }}</td>
-            <td class="item">{{ phone.role}}</td>
+            <td class="item" >{{ phone.role}}</td>
             <td class="item" id="last">{{ phone.update }}</td>
         {% endif %}
         </tr>

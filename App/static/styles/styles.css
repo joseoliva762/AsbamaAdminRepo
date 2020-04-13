@@ -560,6 +560,9 @@
         box-shadow: none;
         overflow: hidden;
     }
+    .user__info-image-container{
+        margin-bottom: 20px;
+    }
 
 }
 @media(max-width: 450px){

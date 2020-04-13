@@ -42,3 +42,7 @@ class UpdateExternalData(FlaskForm):
     username = StringField('Username: ')
     password = PasswordField('Confirmar Password: ', validators=[DataRequired()])
     submit = SubmitField('Actualizar')
+
+class DeleteUser(FlaskForm):
+    password = PasswordField('Confirmar Password: ', validators=[DataRequired()])
+    submit = SubmitField('Eliminar')
