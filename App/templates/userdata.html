@@ -14,7 +14,36 @@
             <div class="table__title">
                 Usuarios Registrados
             </div>
-            <table class="currents__users-table">
+
+            <section class="main__search">
+                <div class="main__search--title">
+                    <h2>¿Desea Buscar a Alguien?</h2>
+                </div>
+                <!-- <div class="main__search-input">
+                    <input type="text" placeholder="Search...">
+                </div> -->
+                <form action="{{ url_for('users.userData') }}" method="POST" class="form__search-container" role="form">
+                    <div class="main__search-input">
+                        {{search.name}}
+                        {{search.submit}}
+                    </div>
+                </form>
+            </section>
+            {% if users %}
+                <section class="carousel">
+                    <div class="carousel__container">
+                        {{ macros.render_userItemData(users) }}
+                        <div class="void"></div>
+                    </div>
+                </section>
+            {% endif %}
+        </div>
+    {% else %}
+        <a href="{{ url_for('home') }}"> Algo ha salido mal, Reload </a>
+    {% endif %}
+{% endblock %}
+
+<!-- <table class="currents__users-table">
                 <tr class="users__table-master">
                     <th class="users__table-item">User</th>
                     <th class="users__table-item">Role</th>
@@ -22,9 +51,4 @@
                     <th class="users__table-item" id="last">Telefono</th>
                 </tr>
                 {{ macros.render_userTableData(users) }}
-            </table>
-        </div>
-    {% else %}
-        <a href="{{ url_for('home') }}"> Algo ha salido mal, Reload </a>
-    {% endif %}
-{% endblock %}
+            </table> -->

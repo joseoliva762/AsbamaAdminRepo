@@ -1,5 +1,5 @@
 from . import users
-from App.forms import LoginForm, SignupForm, ChangePassword, UpdateData, UpdateExternalData, DeleteUser
+from App.forms import LoginForm, SignupForm, ChangePassword, UpdateData, UpdateExternalData, DeleteUser, SearchUser
 from flask_login import login_user, login_required, logout_user
 from flask import render_template, redirect, url_for, flash, request, session, make_response
 from App.firestoreService import getUsers, getUser, getNewId, getUserById, putUser, updatePassword, updateUserData, updateExternalUserData, deleteUserFromDb, deleteFromPhones,getPhoneByUserId
@@ -7,15 +7,27 @@ from App.model import UserData, UserModel
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
 
-@users.route('/all')
+@users.route('/all', methods=['GET',  'POST'])
 @login_required
 def userData():
     users =getUsers()
     userIp = session.get('userIp')
+    search = SearchUser()
+    if(search.is_submitted()):
+        if(search.name.data != ''):
+            users_ph = list()
+            for user in users:
+                if( (search.name.data).lower() in user.to_dict()['nombre'].lower()):
+                    users_ph.append(user)
+
+            users = users_ph
+        # return redirect(url_for('users.userData'))
     context = {
         'userIp': userIp,
-        'users': users
+        'users': users,
+        'search': search
     }
+    print('\t\t\t', users)
     return render_template('userdata.html', **context)
 
 @users.route('/<string:username>', methods=['GET'])

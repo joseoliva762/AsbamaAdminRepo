@@ -7,6 +7,10 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password: ', validators=[DataRequired()])
     submit = SubmitField('Login')
 
+class SearchUser(FlaskForm):
+    name = StringField('name: ')
+    submit = SubmitField('Buscar')
+
 class SignupForm(FlaskForm):
     imagen = StringField('Imagen URL: ')
     telefono = StringField('Telefono: ', validators=[DataRequired()])

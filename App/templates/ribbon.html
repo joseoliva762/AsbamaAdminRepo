@@ -11,18 +11,18 @@
                     </li>
                 {% endif %}
                 {% if update == 2 %}
-                    <li class="ribbon__list--item">
+                    <li class="ribbon__list--item" id="last">
                         <a href="{{ url_for('auth.updateExternalData', username=user.to_dict()['username']) }}" class="linked__ribbon">Actualizar Rol</a>
                     </li>
                     <li class="ribbon__list--item">
-                        <a href="{{ url_for('users.deleteUser', username=user.to_dict()['username']) }}" class="linked__ribbon">Borrar Usuario</a>
+                        <a href="{{ url_for('users.deleteUser', username=user.to_dict()['username']) }}" class="linked__ribbon">Eliminar</a>
                     </li>
                 {% endif %}
                 <li class="ribbon__list--item">
                     <a href="{{ url_for('users.userData') }}" class="linked__ribbon">Usuarios</a>
                 </li>
                 <li class="ribbon__list--item">
-                    <a href="{{ url_for('auth.signup') }}" class="linked__ribbon">Sign Up</a>
+                    <a href="{{ url_for('auth.signup') }}" class="linked__ribbon">Registrar</a>
                 </li>
             {% endif %}
             <li class="ribbon__list--item">
