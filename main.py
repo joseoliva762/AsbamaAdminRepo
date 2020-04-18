@@ -68,18 +68,6 @@ def account():
     }
     return render_template('account.html', **context)
 
-@app.route('/externaluserdata/<string:username>', methods=['GET'])
-@login_required
-def externalUserData(username=None):
-    userIp = session.get('userIp')
-    user = getUser(username)
-    context = {
-        'userIp': userIp,
-        'user': user,
-        'update': 2
-    }
-    return render_template('externaluserdata.html', **context)
-
 @app.route('/telefonos')
 @login_required
 def telefonos():

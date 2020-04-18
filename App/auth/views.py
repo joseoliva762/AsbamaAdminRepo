@@ -60,7 +60,7 @@ def signup():
         'signup': signup
     }
     if ( signup.is_submitted() ):
-        imagen = signup.imagen.data
+        imagen = imageValidator(signup.imagen.data)
         telefono = signup.telefono.data
         correo = signup.correo.data
         nombre = signup.nombre.data
@@ -84,6 +84,8 @@ def signup():
         flash('Registra un Usuario.')
     return render_template('signup.html', **context)
 
+def imageValidator(imgUrl):
+    return imgUrl if imgUrl != '' else url_for('static', filename='images/profile.jpg')
 
 @auth.route('/changepassword', methods=['GET', 'POST'])
 @login_required

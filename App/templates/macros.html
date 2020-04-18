@@ -92,6 +92,24 @@
     {% endfor %}
 {% endmacro %}
 
+{% macro render_userItemData(users) %}
+    {% for user in users %}
+        <div class="carousel__item">
+            <img class="carousel__item-img" src="{{ user.to_dict()['imagen'] }}" alt="{{ user.to_dict()['username'] }}">
+            <div class="carousel__item-details">
+                    <p class="item__details-username">
+                        <a class="vinculo" href="{{ url_for('users.externalUserData', username=user.to_dict()['username']) }}">
+                            {{ user.to_dict()['username'].title() }}
+                        </a>
+                    </p>
+                    <p class="item__details-data" id="last">{{ user.to_dict()['nombre'] }}</p>
+                    <p class="item__details-data">{{ user.to_dict()['role'] }}</p>
+                    <p class="item__details-data">{{ user.to_dict()['telefono'] }}</p>
+            </div>
+        </div>
+    {% endfor %}
+{% endmacro %}
+
 {% macro render_phonesTableData(phones, aceptedRole) %}
     {% for phone in phones %}
         {% if phone.role == aceptedRole %}
