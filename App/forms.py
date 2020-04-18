@@ -8,7 +8,7 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 class SearchUser(FlaskForm):
-    name = StringField('name: ')
+    name = StringField('Nombre: ', render_kw={"placeholder": "Nombre.."}) #, placeholder="Nombre...")
     submit = SubmitField('Buscar')
 
 class SignupForm(FlaskForm):

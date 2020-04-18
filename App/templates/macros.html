@@ -9,7 +9,9 @@
                             data-dismiss="error"
                             class="close" onclick="CerrarNotificacionEmergenteError()">X</button>
             <!-- window.location.reload() -->
-            {{ message }}
+            <div class="mensaje" id="{{ category }}-mensaje">
+                {{ message }}
+            </div>
         </div>
     {% else %}
         <div class="alert" id="alerta">
@@ -17,7 +19,9 @@
                             data-dismiss="alert"
                             class="close" onclick="CerrarNotificacionEmergente()">X</button>
                             <!-- window.location.reload() -->
-            {{ message }}
+            <div class="mensaje" id="alerta-mensaje">
+                {{ message }}
+            </div>
         </div>
     {% endif %}
 {% endmacro %}

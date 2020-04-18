@@ -19,7 +19,6 @@ def userData():
             for user in users:
                 if( (search.name.data).lower() in user.to_dict()['nombre'].lower()):
                     users_ph.append(user)
-
             users = users_ph
         # return redirect(url_for('users.userData'))
     context = {

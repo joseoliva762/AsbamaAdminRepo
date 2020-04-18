@@ -105,7 +105,7 @@
 
 .container{
     /* background-color: #dfdfdf; */
-    background-color: #f7f7fa;
+    background-color: #f0f2f5;
 }
 
 .container .content{
@@ -119,6 +119,7 @@
     flex-direction: column;
     justify-content: start;
     align-items: center;
+    border-radius: 0px 0px 15px 15px;
 }
 
 .ribbon{
@@ -365,12 +366,12 @@
 }
 
 
-/**** FOotet ***************************************************************************************/
+/**** FOoter ***************************************************************************************/
 .footer__container{
     margin: 0px;
     padding: 20px;
     /* background-color: #dfdfdf; */
-    background-color: #f7f7fa;
+    background-color: #f0f2f5;
 }
 
 .footer{
@@ -378,12 +379,12 @@
     justify-content: center;
     align-items: center;
     /* background-color: #dfdfdf; */
-    background-color: #f7f7fa;
+    background-color: #f0f2f5;
 }
 
 .copy{
     /* background-color: #dfdfdf; */
-    background-color: #f7f7fa;
+    background-color: #f0f2f5;
     color: black;
     font-size: small;
 }
@@ -391,7 +392,7 @@
     font-weight: bold;
     text-decoration: none;
     /* background-color: #dfdfdf; */
-    background-color: #f7f7fa;
+    background-color: #f0f2f5;
 }
 
 .copy a:hover{
@@ -414,9 +415,19 @@
     color: #4d7448;
 }
 
+#alerta-mensaje{
+    background-color: #d8edd0;
+    color: #4d7448;
+}
+
 #error{
     background-color: rgb(251, 142, 142);
     border: 1px solid rgb(255, 84, 84);
+    color: rgb(124, 2, 2);
+}
+
+#error-mensaje{
+    background-color: rgb(251, 142, 142);
     color: rgb(124, 2, 2);
 }
 
@@ -446,6 +457,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.mensaje{
+    width: 100%;
+    background-color: transparent;
+    border: none;
 }
 
 

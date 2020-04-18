@@ -161,7 +161,6 @@ def validarData(passData, CurrentData):
 @login_required
 def updateExternalData(username=None):
     userIp = session.get('userIp')
-    flash('Actualizar Informacion de {}.'.format(username.title()))
     updateExternalData = UpdateExternalData()
     context =  {
         'userIp': userIp,
@@ -178,6 +177,8 @@ def updateExternalData(username=None):
             return redirect(url_for('users.userData'))
         else:
             flash('Contraseña Invalida.', 'error')
+    else:
+        flash('Actualizar Informacion de {}.'.format(username.title()))
     return render_template('updateexternaldata.html', **context)
 
 
