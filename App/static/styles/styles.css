@@ -351,29 +351,19 @@
     outline: none;
 }
 
-/* #submit{
+#submit{
     width: 120px;
     height: 100%;
     background-color: #dfdfdf;
-    padding: 2px; */
+    padding: 2px;
     /* background-color: #f7f7fa; */
-/*   color: black;
-    border-radius: 20px;
+    color: black;
+    border-radius: 35px;
     margin: 10px 0;
     outline: none;
     object-fit: cover;
-} */
-
-#submit{
-    width: 100%;
-    height: 40px;
-    background-color: #dfdfdf;
-    /* background-color: #f7f7fa; */
-    color: black;
-    border-radius: 20px;
-    margin: 10px 0;
-    outline: none;
 }
+
 
 /**** FOotet ***************************************************************************************/
 .footer__container{
@@ -470,7 +460,7 @@
 }
 .user__info-tittle{
     width: 100%;
-    height: 50px;
+    min-height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -663,13 +653,13 @@
     font-weight: bold;
 }
 
-.form__container-session{
-    width: 80%;
+.form__search-container{
+    width: 95%;
     margin: 0 auto;
-    height: 60px;
+    min-height: 60px;
 }
 
-.form__container-session .main__search-input{
+.form__search-container .main__search-input{
     width: 80%;
     margin: 0 auto;
     height: 49px;
@@ -678,7 +668,7 @@
     align-items: center;
 }
 
-.form__container-session .main__search-input  input{
+.form__search-container .main__search-input  input{
     background-color:  rgba(0, 0, 0 ,0.03 );
     width: 100%;
     height: 100%;
@@ -689,6 +679,7 @@
     padding-left: 20px;
     color: black;
     outline: none;
+    margin-right: 5px;
 }
 ::placeholder{
     color: #6f6f6f;
@@ -723,12 +714,32 @@
     .user__info-image-container{
         margin-bottom: 20px;
     }
+    .form__search-container{
+        height: 200px;
+    }
+    .main__search{
+        height: 160px;
+    }
+    .form__search-container .main__search-input{
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .form__search-container .main__search-input  input{
+        margin-right: 0px;
+    }
 }
 
 @media(max-width: 545px){
     #last{
         display: none;
         padding: 0px;
+    }
+    .main__search{
+        margin-bottom: 20px;
+        height: 180px;
     }
 }
 @media(max-width: 450px){
@@ -792,6 +803,7 @@
     }
     .main__search{
         margin-bottom: 20px;
+        height: 160px;
     }
     .carousel{
         width: 100%;

@@ -126,7 +126,6 @@ def changePassword():
 def updateData():
     userIp = session.get('userIp')
     username = session.get('username')
-    flash('Actualizar Informacion de {}.'.format(username.title()))
     updateData = UpdateData()
     context =  {
         'userIp': userIp,
@@ -147,6 +146,9 @@ def updateData():
             return redirect(url_for('account'))
         else:
             flash('Contraseña Invalida.', 'error')
+    else:
+        flash('Actualizar Informacion de {}.'.format(username.title()))
+
 
     return render_template('updatedata.html', **context)
 

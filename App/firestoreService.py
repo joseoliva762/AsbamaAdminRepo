@@ -31,11 +31,6 @@ def getUser(username):
     for user in users:
         return user
 
-def searchUsers(name):
-    users = db.collection('users').where('nombre', '==', name).get()
-    for user in users:
-        return user
-
 def getUserById(userId):
     return db.collection('users').document(userId).get()
 
