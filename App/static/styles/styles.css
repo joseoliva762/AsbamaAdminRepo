@@ -407,6 +407,7 @@
     justify-content: start;
     align-items: center;
     text-align: center;
+    transition: 250ms all;
 }
 
 #alerta{
@@ -590,7 +591,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: 450ms all;
+    transition: 250ms all;
     transform-origin: center left;
     box-shadow: 0px 1px 2px 1px rgba(0,0,0,0.18);
     position: relative;

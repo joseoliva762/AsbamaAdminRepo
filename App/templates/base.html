@@ -32,6 +32,13 @@
             </div>
         </body>
         <script type="text/javascript">
+            setTimeout(() => {
+                CerrarNotificacionEmergente()
+                CerrarNotificacionEmergenteError()
+            }, 10000 );
+            setTimeout(() => {
+                CerrarNotificacionEmergenteError()
+            }, 10000 );
             function CerrarNotificacionEmergente(){
                 var contenedor = document.getElementById("alerta");
                 contenedor.style.display = "none";
