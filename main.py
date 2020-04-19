@@ -1,8 +1,8 @@
 from flask import request, make_response, redirect, render_template, session, url_for, flash
 from flask_bootstrap import Bootstrap
 from flask_login import login_required
-from App.forms import LoginForm
-from App.firestoreService import getUsers, getUserRegisters, getUser, getPhones, getPhonesByAdmin
+from App.forms import LoginForm, RegisterAccess
+from App.firestoreService import getUsers, getUserRegisters, getUser, getPhones, getPhonesByAdmin, getRegister, setRegister, getCurrentRegister, getUserById
 import unittest
 
 from App import createApp
@@ -53,8 +53,11 @@ def home():
     # username = session.get('username')
     #response = make_response(redirect('/home'))
     print('Llegoooo aquiiiiii......')
+    registros = getRegister()
     context = {
-        'userIp': userIp
+        'userIp': userIp,
+        'registros': registros,
+        'registroCode': 314
     }
     return render_template('home.html', **context)
 
@@ -62,9 +65,12 @@ def home():
 @login_required
 def account():
     userIp = session.get('userIp')
+    user = getUser(str(session.get('username')))
+    registros = getCurrentRegister(user.id)
     context = {
         'userIp': userIp,
-        'update': 1
+        'update': 1,
+        'registros': registros
     }
     return render_template('account.html', **context)
 
@@ -79,3 +85,24 @@ def telefonos():
         'phones': phonesByAdmins
     }
     return render_template('telefonos.html', **context)
+
+
+@app.route('/registros', methods=['GET', 'POST'])
+@login_required
+def registros():
+    userIp = session.get('userIp')
+    registros = RegisterAccess()
+    context = {
+        'userIp': userIp,
+        'registros': registros
+    }
+    if( registros.is_submitted() ):
+        descripcion = registros.descripcion.data
+        username = session.get('username')
+        user = getUser(username)
+        flash(' Registro del usuario {} creado exitosamente!'.format(username))
+        setRegister(user.id, descripcion)
+
+        return redirect(url_for('home'))
+    return render_template('registros.html', **context)
+

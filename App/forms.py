@@ -11,6 +11,10 @@ class SearchUser(FlaskForm):
     name = StringField('Nombre: ', render_kw={"placeholder": "Nombre.."}) #, placeholder="Nombre...")
     submit = SubmitField('Buscar')
 
+class RegisterAccess(FlaskForm):
+    descripcion = StringField('Descripcion: ', validators=[DataRequired()])
+    submit = SubmitField('Registrar')
+
 class SignupForm(FlaskForm):
     imagen = StringField('Imagen URL: ')
     telefono = StringField('Telefono: ', validators=[DataRequired()])

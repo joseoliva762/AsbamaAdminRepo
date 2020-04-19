@@ -96,6 +96,21 @@
     {% endfor %}
 {% endmacro %}
 
+{% macro render_registerTableData(registers) %}
+    {% for register in registers %}
+        <tr class="users__table-row">
+            <th>
+                <a class="vinculo" href="{{ url_for('users.externalUserData', username=register.user) }}">
+                    {{ register.user.title() }}
+                </a>
+            </th>
+            <td class="item">{{ register.telefono }}</td>
+            <td class="item" >{{ register.fecha }}</td>
+            <td class="item" id="last">{{ register.descripcion }}</td>
+        </tr>
+    {% endfor %}
+{% endmacro %}
+
 {% macro render_userItemData(users) %}
     {% for user in users %}
         <div class="carousel__item">

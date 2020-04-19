@@ -2,6 +2,11 @@
     <div class="ribbon">
         <ul class="ribbon__list">
             {% if current_user.role == 'Administrador' %}
+                {% if registroCode == 314 %}
+                    <li class="ribbon__list--item">
+                        <a href="{{ url_for('registros') }}" class="linked__ribbon">Ingreso</a>
+                    </li>
+                {% endif %}
                 <li class="ribbon__list--item">
                     <a href="{{ url_for('telefonos') }}" class="linked__ribbon">Telefonos</a>
                 </li>

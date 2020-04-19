@@ -14,8 +14,19 @@
             <img class="logo" src="{{ url_for('static', filename='images/asbama.jpg') }}" alt="Asbama Logo">
         </div>
         <!-- {{ macros.render_userDataBlock(current_user) }} -->
-        <div class="current__user-ingresos">
-            <!-- Tabla de registros -->
+        <div class="current__user-info">
+            <div class="table__title">
+                Registros De Ingreso
+            </div>
+            <table class="currents__users-table">
+                <tr class="users__table-master">
+                    <th class="users__table-item">User</th>
+                    <th class="users__table-item">Telefono</th>
+                    <th class="users__table-item">Fecha</th>
+                    <th class="users__table-item" id="last">Descripción</th>
+                    {{ macros. render_registerTableData(registros) }}
+                </tr>
+            </table>
         </div>
     {% else %}
         <a href="{{ url_for('index') }}"> Algo ha salido mal, Reload </a>

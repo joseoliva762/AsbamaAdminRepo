@@ -2,7 +2,7 @@ from . import users
 from App.forms import LoginForm, SignupForm, ChangePassword, UpdateData, UpdateExternalData, DeleteUser, SearchUser
 from flask_login import login_user, login_required, logout_user
 from flask import render_template, redirect, url_for, flash, request, session, make_response
-from App.firestoreService import getUsers, getUser, getNewId, getUserById, putUser, updatePassword, updateUserData, updateExternalUserData, deleteUserFromDb, deleteFromPhones,getPhoneByUserId
+from App.firestoreService import getUsers, getUser, getNewId, getUserById, putUser, updatePassword, updateUserData, updateExternalUserData, deleteUserFromDb, deleteFromPhones,getPhoneByUserId, getCurrentRegister
 from App.model import UserData, UserModel
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
@@ -34,10 +34,13 @@ def userData():
 def externalUserData(username=None):
     userIp = session.get('userIp')
     user = getUser(username)
+    registros = getCurrentRegister(user.id)
     context = {
         'userIp': userIp,
         'user': user,
-        'update': 2
+        'update': 2,
+        'name': user.to_dict()['nombre'],
+        'registros': registros
     }
     return render_template('externaluserdata.html', **context)
 

@@ -12,6 +12,14 @@ class PhoneModel():
         self.role = role
         self.update = update
 
+class RegitrosModel():
+    def __init__(self, user, telefono, fecha, descripcion):
+        self.user = user
+        self.telefono = telefono
+        self. fecha = fecha
+        self.descripcion = descripcion
+
+
 if (not len(firebase_admin._apps)):
     credential = credentials.ApplicationDefault()
     firebase_admin.initialize_app(credential, {
@@ -116,3 +124,40 @@ def getPhonesByAdmin(phones):
         phoneTemplateData.append(model) 
     return phoneTemplateData
 
+def setCurrentRegister(registerId, userId, fechadecreacion, descripcion):
+    accessRef = db.collection('users').document(str(userId)).collection('registers').document(registerId)
+    accessRef.set({
+        'descripcion': descripcion,
+        'user': userId,
+        'fechadecreacion': fechadecreacion
+    })
+
+def getCurrentRegister(userId):
+    registros = db.collection('users').document(userId).collection('registers').get()
+    registerTemplateData = list()
+    for registro in registros:
+        user = getUserById(str(registro.to_dict()['user']))
+        model = RegitrosModel(user.to_dict()['username'], user.to_dict()['telefono'], registro.to_dict()['fechadecreacion'], registro.to_dict()['descripcion'])
+        registerTemplateData.append(model) 
+    return registerTemplateData
+
+
+def setRegister(userId,descripcion):
+    registerId = str(getNewId())
+    accessRef = db.collection('register').document(registerId)
+    fechadecreacion = datetime.now()
+    accessRef.set({
+        'descripcion': descripcion,
+        'user': userId,
+        'fechadecreacion': fechadecreacion
+    })
+    setCurrentRegister(registerId, userId, fechadecreacion, descripcion)
+
+def getRegister():
+    registros = db.collection('register').get()
+    registerTemplateData = list()
+    for registro in registros:
+        user = getUserById(str(registro.to_dict()['user']))
+        model = RegitrosModel(user.to_dict()['username'], user.to_dict()['telefono'], registro.to_dict()['fechadecreacion'], registro.to_dict()['descripcion'])
+        registerTemplateData.append(model) 
+    return registerTemplateData
