@@ -1,0 +1,27 @@
+{% extends "base.html"  %}
+{% import "macros.html" as macros %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}
+    {{super()}}
+    Crear Registros
+{% endblock %}
+
+{% block content%}
+    {% if userIp and current_user.role == 'Administrador' %}
+        <div class="form__container">
+            <img class="logo" src="{{ url_for('static', filename='images/asbama.jpg') }}" alt="Asbama Logo">
+            <form action="{{ url_for('registros') }}" method="POST" class="form__container-session" role="form">
+                <div class="container__session-item">
+                    {{ registros.descripcion.label }}
+                    {{ registros.descripcion }}
+                </div>
+                <div class="container__session-submit">
+                    {{ registros.submit }}
+                </div>
+            </form>
+        </div>
+    {% else %}
+        <a href="{{ url_for('home') }}"> Algo ha salido mal, Reload </a>
+    {% endif %}
+{% endblock %}
