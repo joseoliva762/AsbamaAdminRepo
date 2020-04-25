@@ -13,8 +13,8 @@
             <img class="logo" src="{{ url_for('static', filename='images/asbama.jpg') }}" alt="Asbama Logo">
             <form action="{{ url_for('registros') }}" method="POST" class="form__container-session" role="form">
                 <div class="container__session-item">
-                    {{ registros.descripcion.label }}
                     {{ registros.descripcion }}
+                    {{ registros.descripcion.label }}
                 </div>
                 <div class="container__session-submit">
                     {{ registros.submit }}

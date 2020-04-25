@@ -12,12 +12,12 @@
             <img class="logo" src="{{ url_for('static', filename='images/asbama.jpg') }}" alt="Asbama Logo">
             <form action="{{ url_for('auth.updateExternalData', username=username) }}" method="POST" class="form__container-session" role="form">
                 <div class="container__session-item">
-                    {{ updateexternaldata.password.label }}
                     {{ updateexternaldata.password }}
+                    {{ updateexternaldata.password.label }}
                 </div>
                 <div class="container__session-item">
-                    {{ updateexternaldata.role.label }}
                     {{ updateexternaldata.role }}
+                    {{ updateexternaldata.role.label }}
                 </div>
                 <div class="container__session-submit">
                     {{ updateexternaldata.submit }}

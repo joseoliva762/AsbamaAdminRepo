@@ -12,32 +12,32 @@
             <img class="logo" src="{{ url_for('static', filename='images/asbama.jpg') }}" alt="Asbama Logo">
             <form action="{{ url_for('auth.signup') }}" method="POST" class="form__container-session" role="form">
                 <div class="container__session-item">
-                    {{ signup.correo.label }}
                     {{ signup.correo }}
+                    {{ signup.correo.label }}
                 </div>
                 <div class="container__session-item">
-                    {{ signup.nombre.label }}
                     {{ signup.nombre }}
+                    {{ signup.nombre.label }}
                 </div>
                 <div class="container__session-item">
-                    {{ signup.role.label }}
                     {{ signup.role }}
+                    {{ signup.role.label }}
                 </div>
                 <div class="container__session-item">
-                    {{ signup.username.label }}
                     {{ signup.username }}
+                    {{ signup.username.label }}
                 </div>
                 <div class="container__session-item">
-                    {{ signup.password.label }}
                     {{ signup.password }}
+                    {{ signup.password.label }}
                 </div>
                 <div class="container__session-item">
-                    {{ signup.imagen.label }}
                     {{ signup.imagen }}
+                    {{ signup.imagen.label }}
                 </div>
                 <div class="container__session-item">
-                    {{ signup.telefono.label }}
                     {{ signup.telefono }}
+                    {{ signup.telefono.label }}
                 </div>
                 <div class="container__session-submit">
                     {{ signup.submit }}

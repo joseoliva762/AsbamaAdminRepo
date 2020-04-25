@@ -324,10 +324,12 @@
 
 .container__session-item{
     width: 100%;
-    height: 30px;
+    height: 40px;
+    min-width: 270px;
     padding: 5px;
     margin: 20px 0;
     border-bottom: 2px solid#6f6f6f;
+    position: relative;
 }
 
 .container__session-item:hover{
@@ -335,16 +337,47 @@
     color: black;
 }
 
-.container__session-item > label{
+
+/* .container__session-item > label{
     font-size: small;
     color: #6f6f6f;
-    /* font-weight: bold; */
 }
 
 .container__session-item > input{
     border: none;
     outline: none;
     color: black;
+} */
+
+.container__session-item  input{
+    width: 100%;
+    padding: 10px 2px ;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: black;
+}
+
+.container__session-item  label{
+    padding: 10px;
+    font-size: 16px;
+    color: #6f6f6f;
+    position: absolute;
+    top: 5px;
+    left: 0;
+    pointer-events: none;
+    transition: .5s;
+    background: transparent;
+}
+
+.container__session-item  input:focus ~ label,
+.container__session-item  input:valid ~ label{
+    padding-bottom: 0px;
+    top: -20px;
+    left: 0;
+    color: #1c5020;
+    font-size: 12px;
 }
 
 .container__session-submit{
@@ -363,6 +396,15 @@
     margin: 10px 0;
     outline: none;
     object-fit: cover;
+    border: none;
+    cursor: pointer;
+    transition: .1s;
+}
+
+#submit:active{
+    background-color: #1c5020;
+    color: white;
+    font-weight: bold;
 }
 
 

@@ -161,3 +161,11 @@ def getRegister():
         model = RegitrosModel(user.to_dict()['username'], user.to_dict()['telefono'], registro.to_dict()['fechadecreacion'], registro.to_dict()['descripcion'])
         registerTemplateData.append(model) 
     return registerTemplateData
+
+def deleteRegister(userId):
+    registersQuery = db.collection('register').where('user', '==', userId).get()
+    for registerQuery in registersQuery:
+        registerRef = db.collection('register').document(str(registerQuery.id))
+        registerRef.delete()
+        registerRef = db.collection('users').document(userId).collection('registers').document(registerQuery.id)
+        registerRef.delete()

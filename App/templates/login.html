@@ -12,12 +12,12 @@
             <img class="logo" src="{{ url_for('static', filename='images/asbama.jpg') }}" alt="Asbama Logo">
             <form action="{{ url_for('auth.login') }}" method="POST" class="form__container-session" role="form">
                 <div class="container__session-item">
-                    {{ login.username.label }}
                     {{ login.username }}
+                    {{ login.username.label }}
                 </div>
                 <div class="container__session-item">
-                    {{ login.password.label }}
                     {{ login.password }}
+                    {{ login.password.label }}
                 </div>
                 <div class="container__session-submit">
                     {{ login.submit }}

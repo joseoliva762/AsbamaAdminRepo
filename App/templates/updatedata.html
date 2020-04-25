@@ -12,32 +12,32 @@
             <img class="logo" src="{{ url_for('static', filename='images/asbama.jpg') }}" alt="Asbama Logo">
             <form action="{{ url_for('auth.updateData') }}" method="POST" class="form__container-session" role="form">
                 <div class="container__session-item">
-                    {{ updatedata.password.label }}
                     {{ updatedata.password }}
+                    {{ updatedata.password.label }}
                 </div>
                 <div class="container__session-item">
-                    {{ updatedata.correo.label }}
                     {{ updatedata.correo }}
+                    {{ updatedata.correo.label }}
                 </div>
                 <div class="container__session-item">
-                    {{ updatedata.nombre.label }}
                     {{ updatedata.nombre }}
+                    {{ updatedata.nombre.label }}
                 </div>
                 <div class="container__session-item">
-                    {{ updatedata.role.label }}
                     {{ updatedata.role }}
+                    {{ updatedata.role.label }}
                 </div>
                 <!-- <div class="container__session-item">
                     {{ updatedata.username.label }}
                     {{ updatedata.username }}
                 </div> -->
                 <div class="container__session-item">
-                    {{ updatedata.imagen.label }}
                     {{ updatedata.imagen }}
+                    {{ updatedata.imagen.label }}
                 </div>
                 <div class="container__session-item">
-                    {{ updatedata.telefono.label }}
                     {{ updatedata.telefono }}
+                    {{ updatedata.telefono.label }}
                 </div>
                 <div class="container__session-submit">
                     {{ updatedata.submit }}

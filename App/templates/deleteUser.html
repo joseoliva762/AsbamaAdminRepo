@@ -12,8 +12,8 @@
             <img class="logo" src="{{ url_for('static', filename='images/asbama.jpg') }}" alt="Asbama Logo">
             <form action="{{ url_for('users.deleteUser', username=user.to_dict()['username']) }}" method="POST" class="form__container-session" role="form">
                 <div class="container__session-item">
-                    {{ delete.password.label }}
                     {{ delete.password }}
+                    {{ delete.password.label }}
                 </div>
                 <div class="container__session-submit">
                     {{ delete.submit }}

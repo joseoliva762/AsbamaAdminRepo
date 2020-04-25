@@ -2,7 +2,7 @@ from . import users
 from App.forms import LoginForm, SignupForm, ChangePassword, UpdateData, UpdateExternalData, DeleteUser, SearchUser
 from flask_login import login_user, login_required, logout_user
 from flask import render_template, redirect, url_for, flash, request, session, make_response
-from App.firestoreService import getUsers, getUser, getNewId, getUserById, putUser, updatePassword, updateUserData, updateExternalUserData, deleteUserFromDb, deleteFromPhones,getPhoneByUserId, getCurrentRegister
+from App.firestoreService import getUsers, getUser, getNewId, getUserById, putUser, updatePassword, updateUserData, updateExternalUserData, deleteUserFromDb, deleteFromPhones,getPhoneByUserId, getCurrentRegister, deleteRegister
 from App.model import UserData, UserModel
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
@@ -61,9 +61,11 @@ def deleteUser(username=None):
         currentPassword = delete.password.data
         if(check_password_hash(user.to_dict()['password'], currentPassword)):
             flash('El usuario {} fue borrado Exitosamente.'.format(username))
+            deleteRegister(user.id)
+
             phoneDb = getPhoneByUserId(user.id)
             deleteFromPhones(phoneDb.id)
-            #print('>>>', phoneDb.to_dict()['telefono'])
+            # print('>>>>', phonesDeleted)
             deleteUserFromDb(user.id)
             return redirect(url_for('home'))
         else:
