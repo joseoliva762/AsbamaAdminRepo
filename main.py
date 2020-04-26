@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask_login import login_required
 from App.forms import LoginForm, RegisterAccess
 from App.firestoreService import getUsers, getUserRegisters, getUser, getPhones, getPhonesByAdmin, getRegister, setRegister, getCurrentRegister, getUserById
-import unittest
+import unittest, random
 
 from App import createApp
 
@@ -57,9 +57,14 @@ def home():
     context = {
         'userIp': userIp,
         'registros': registros,
-        'registroCode': 314
+        'registroCode': 314,
+        'background': chargeBackgruound()
     }
     return render_template('home.html', **context)
+
+def chargeBackgruound():
+    selector = round(random.random() * 5)
+    return url_for('static', filename='images/background{}.jpg'.format(selector))
 
 @app.route('/account', methods=['GET'])
 @login_required

@@ -40,7 +40,7 @@ def externalUserData(username=None):
         'user': user,
         'update': 2,
         'name': user.to_dict()['nombre'],
-        'registros': registros
+        'registros': registros if len(registros) >0 else None
     }
     return render_template('externaluserdata.html', **context)
 

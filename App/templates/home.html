@@ -9,26 +9,31 @@
 
 {% block content%}
     {% if userIp %}
-        <div class="bienvenida">
+        <div class="bienvenida" id="bienvenida">
             <h1>Hola {{ username | capitalize }}, Bienvenido a</h1>
             <img class="logo" src="{{ url_for('static', filename='images/asbama.jpg') }}" alt="Asbama Logo">
         </div>
-        <!-- {{ macros.render_userDataBlock(current_user) }} -->
-        <div class="current__user-info">
-            <div class="table__title">
-                Registros De Ingreso
+        {% if registros %}
+            <div class="current__user-info">
+                <div class="table__title">
+                    Registros De Ingreso
+                </div>
+                <table class="currents__users-table">
+                    <tr class="users__table-master">
+                        <th class="users__table-item">User</th>
+                        <th class="users__table-item">Telefono</th>
+                        <th class="users__table-item">Fecha</th>
+                        <th class="users__table-item" id="last">Descripción</th>
+                        {{ macros. render_registerTableData(registros) }}
+                    </tr>
+                </table>
             </div>
-            <table class="currents__users-table">
-                <tr class="users__table-master">
-                    <th class="users__table-item">User</th>
-                    <th class="users__table-item">Telefono</th>
-                    <th class="users__table-item">Fecha</th>
-                    <th class="users__table-item" id="last">Descripción</th>
-                    {{ macros. render_registerTableData(registros) }}
-                </tr>
-            </table>
-        </div>
-    {% else %}
+            <div class="bkg__container">
+                <!-- <img src="https://p4.wallpaperbetter.com/wallpaper/968/675/647/banana-banana-trees-isla-dometepe-nicaragua-wallpaper-preview.jpg" alt="imagen" class="background__image"> -->
+                <img src="{{ background }}" alt="imagen" class="background__image">
+            </div>
+        {% endif %}
+        {% else %}
         <a href="{{ url_for('index') }}"> Algo ha salido mal, Reload </a>
-    {% endif %}
+        {% endif %}
 {% endblock %}

@@ -34,11 +34,13 @@
         <script type="text/javascript">
             setTimeout(() => {
                 CerrarNotificacionEmergente()
-                CerrarNotificacionEmergenteError()
-            }, 10000 );
+            }, 5000 );
             setTimeout(() => {
                 CerrarNotificacionEmergenteError()
             }, 10000 );
+            setTimeout(() =>{
+                CerrarBienvenida()
+            }, 15000)
             function CerrarNotificacionEmergente(){
                 var contenedor = document.getElementById("alerta");
                 contenedor.style.display = "none";
@@ -48,6 +50,10 @@
                 var contenedor = document.getElementById("error");
                 contenedor.style.display = "none";
                 // return true;
+            }
+            function CerrarBienvenida(){
+                var contenedor = document.getElementById("bienvenida");
+                contenedor.style.display = "none";
             }
         </script>
     </html>
