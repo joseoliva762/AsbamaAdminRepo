@@ -136,9 +136,11 @@
     justify-content: start;
     align-items: center;
     border-radius: 0px 0px 15px 15px;
+    position: relative;
 }
 
 .ribbon{
+    z-index: 2;
     padding: 0;
     /* border-bottom: 1px solid #dfdfdf; */
     margin: 0;
@@ -154,8 +156,10 @@
     list-style: none;
     justify-content: flex-end;
     align-items: center;
+    background: transparent;
 }
 .ribbon__list--item{
+    z-index: 2;
     padding: 0 5px;
     height: 100%;
     transition: 200ms;
@@ -218,7 +222,7 @@
     display: none;
     list-style: none;
     padding: 20px;
-    margin: 5px 0px 0px -70px;
+    margin: 6px 0px 0px -70px;
     width: 100px;
     position: absolute;
     text-align: end;
@@ -339,9 +343,9 @@
 }
 
 .container__session-item{
-    width: 100%;
+    width: 95%;
     height: 40px;
-    min-width: 270px;
+    min-width: 250px;
     padding: 5px;
     margin: 20px 0;
     border-bottom: 2px solid var(--gray-not-found);
@@ -367,8 +371,8 @@
 
 .container__session-item  input{
     width: 100%;
-    padding: 10px 2px 10px 16px;
-    font-size: 16px;
+    padding: 10px 2px 10px 15px;
+    font-size: 14px;
     border: none;
     outline: none;
     background: transparent;
@@ -377,11 +381,11 @@
 
 .container__session-item  label{
     padding: 10px;
-    font-size: 16px;
+    font-size: 14px;
     color: var(--gray-not-found);
     position: absolute;
     top: 5px;
-    left: 13px;
+    left: 11px;
     pointer-events: none;
     transition: .5s;
     background: transparent;
@@ -391,7 +395,7 @@
 .container__session-item  input:valid ~ label{
     padding-bottom: 0px;
     top: -20px;
-    left: 13px;
+    left: 11px;
     color: var(--verde-asbama);
     font-size: 12px;
 }
@@ -404,6 +408,7 @@
 #submit{
     width: 120px;
     height: 100%;
+    min-height: 30px;
     background-color: var(--gray-button);
     padding: 2px;
     /* background-color: #f7f7fa; */
@@ -423,6 +428,28 @@
     font-weight: bold;
 }
 
+.bkg__container{
+    width: 100%;
+    height: 100%;
+    border-radius: 0px 0px 15px 15px;
+    position: absolute;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.background__image{
+    border-radius: 0px 0px 15px 15px;
+    position: absolute;
+    bottom: -5px;
+    height: 110%;
+    overflow: hidden;
+    filter: opacity(0.8) blur(8px);
+    width: 110%;
+    z-index: 0;
+    left: -10px;
+    right: 0;
+}
 
 /**** FOoter ***************************************************************************************/
 .footer__container{
@@ -511,11 +538,16 @@
 }
 
 .bienvenida{
+    z-index: 1;
+    box-shadow: 0px 1px 2px 1px rgba(0,0,0,0.18);
     margin: 0 0 20px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 80%;
+    border-radius: 15px;
+    padding: 20px;
 }
 .mensaje{
     width: 100%;
@@ -525,6 +557,7 @@
 
 /* Account ***********************************************************************/
 .current__user-info{
+    z-index: 1;
     width: 80%;
     min-height: 100px;
     box-shadow: 0px 1px 2px 1px rgba(0,0,0,0.18);
@@ -607,7 +640,7 @@
     text-decoration: none;
 }
 .vinculo:hover{
-    text-decoration: underline;
+    /* text-decoration: underline; */
     color: var(--verde-asbama);
     font-weight: bold;
 }
@@ -650,7 +683,7 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: 250ms all;
+    transition: 200ms all;
     transform-origin: center left;
     box-shadow: 0px 1px 2px 1px rgba(0,0,0,0.18);
     position: relative;
@@ -661,12 +694,14 @@
 }
 
 .carousel__container:hover .carousel__item{
-    opacity: 0.3;
+    opacity: 0.5;
+    filter: blur(4px);
 }
 
 .carousel__container:hover .carousel__item:hover{
     transform: scale(1.05);
     opacity: 1;
+    filter: blur(0);
 }
 
 .carousel__item-img{
