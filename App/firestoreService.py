@@ -6,11 +6,12 @@ from datetime import datetime
 # from App.model import PhoneModel
 
 class PhoneModel():
-    def __init__(self, user,telefono, role, update):
+    def __init__(self, user,telefono, role, update, required):
         self.user = user
         self.telefono = telefono
         self.role = role
         self.update = update
+        self.required = required
 
 class RegitrosModel():
     def __init__(self, user, telefono, fecha, descripcion):
@@ -74,7 +75,8 @@ def putUser(userData):
     telefonosRef.set({
         'telefono': userData.telefono,
         'user': userData.id,
-        'fechadeactualizacion': datetime.now()
+        'fechadeactualizacion': datetime.now(),
+        'requerido': False
     })
 
 def getNewId():
@@ -120,7 +122,7 @@ def getPhonesByAdmin(phones):
     phoneTemplateData = list()
     for phone in phones:
         user = getUserById(phone.to_dict()['user'])
-        model = PhoneModel(user, phone.to_dict()['telefono'], user.to_dict()['role'], phone.to_dict()['fechadeactualizacion'])
+        model = PhoneModel(user, phone.to_dict()['telefono'], user.to_dict()['role'], phone.to_dict()['fechadeactualizacion'], phone.to_dict()['requerido'])
         phoneTemplateData.append(model) 
     return phoneTemplateData
 
@@ -169,3 +171,18 @@ def deleteRegister(userId):
         registerRef.delete()
         registerRef = db.collection('users').document(userId).collection('registers').document(registerQuery.id)
         registerRef.delete()
+
+def updateRequired(phoneId, required):
+    phoneRef = _getPhoneRef(phoneId)
+    phoneRef.update({ 
+        'requerido': not bool(required),
+        'fechadeactualizacion': datetime.now()
+    })
+
+def _getPhoneRef(phoneId):
+    return db.collection('telefonos').document(phoneId)
+
+def getPhoneId(phoneNumbre):
+    telefonos = db.collection('telefonos').where('telefono', '==', phoneNumbre).get()
+    for telefono in telefonos:
+        return telefono

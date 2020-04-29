@@ -1,8 +1,8 @@
 from flask import request, make_response, redirect, render_template, session, url_for, flash
 from flask_bootstrap import Bootstrap
 from flask_login import login_required
-from App.forms import LoginForm, RegisterAccess
-from App.firestoreService import getUsers, getUserRegisters, getUser, getPhones, getPhonesByAdmin, getRegister, setRegister, getCurrentRegister, getUserById
+from App.forms import LoginForm, RegisterAccess, UpdatePhoneRequired
+from App.firestoreService import getUsers, getUserRegisters, getUser, getPhones, getPhonesByAdmin, getRegister, setRegister, getCurrentRegister, getUserById, getPhoneId, updateRequired
 import unittest, random
 
 from App import createApp
@@ -85,9 +85,12 @@ def telefonos():
     userIp = session.get('userIp')
     telefonos = getPhones()
     phonesByAdmins = getPhonesByAdmin(telefonos)
+    updatePhones = UpdatePhoneRequired()
+    updatePhones.submit.id = "updateForm"
     context = {
         'userIp': userIp,
-        'phones': phonesByAdmins
+        'phones': phonesByAdmins,
+        'updatephones': updatePhones
     }
     return render_template('telefonos.html', **context)
 
@@ -111,3 +114,14 @@ def registros():
         return redirect(url_for('home'))
     return render_template('registros.html', **context)
 
+@app.route('/telefonos/update/<string:telefono>/<int:required>', methods=['GET', 'POST'])
+@login_required
+def updatePhoneRequired(telefono=None, required=0):
+    userIp = session.get('userIp')
+    context = {
+        'userIp': userIp,
+        'registros': registros
+    }
+    phone = getPhoneId(telefono)
+    updateRequired(phone.id, required)
+    return redirect( url_for('telefonos') )

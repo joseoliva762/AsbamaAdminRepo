@@ -21,4 +21,5 @@ def createApp():
     loginManager.init_app(app)
     app.register_blueprint(auth)
     app.register_blueprint(users)
+    # app.run(port=7100, debug=True, host='192.168.1.13')
     return app

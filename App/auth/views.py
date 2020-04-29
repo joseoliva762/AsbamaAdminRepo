@@ -18,7 +18,7 @@ def login():
         'login': login
     }
     if ( login.is_submitted() ):
-        username = login.username.data
+        username = (login.username.data).lower()
         #session['username'] =  login.username.data#request.form.get('username')
         password = login.password.data
         userDoc = getUser(username)

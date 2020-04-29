@@ -54,3 +54,6 @@ class UpdateExternalData(FlaskForm):
 class DeleteUser(FlaskForm):
     password = PasswordField('Confirmar Password: ', validators=[DataRequired()])
     submit = SubmitField('Eliminar')
+
+class UpdatePhoneRequired(FlaskForm):
+    submit = SubmitField('Update')

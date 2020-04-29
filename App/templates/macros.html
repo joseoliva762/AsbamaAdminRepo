@@ -129,7 +129,7 @@
     {% endfor %}
 {% endmacro %}
 
-{% macro render_phonesTableData(phones, aceptedRole) %}
+{% macro render_phonesTableData(phones, aceptedRole, updatephones) %}
     {% for phone in phones %}
         {% if phone.role == aceptedRole %}
         <tr class="users__table-row">
@@ -139,9 +139,27 @@
                 </a>
             </th>
             <td class="item">{{ phone.telefono }}</td>
-            <td class="item" >{{ phone.role}}</td>
-            <td class="item" id="last">{{ phone.update }}</td>
-        {% endif %}
+            <td class="item" id="last" >{{ phone.role}}</td>
+            <td class="item" >
+                <form action="{{ url_for('updatePhoneRequired', telefono=phone.telefono, required=phone.required) }}" method="POST" class="form__container-session" role="form">
+                    {% if phone.required %}
+                        <div class="required__box" id="required__true">
+                    {% else %}
+                        <div class="required__box" id="required__false">
+                    {% endif %}
+                        {{ updatephones.submit }}
+                        {{ phone.required }}
+                    </div>
+                </form>
+                <!-- {% if phone.required %}
+                    <div class="required__box" id="required__true">
+                {% else %}
+                    <div class="required__box" id="required__false">
+                {% endif %}
+                    {{ phone.required }}
+                </div> -->
+            </td>
         </tr>
+        {% endif %}
     {% endfor %}
 {% endmacro %}

@@ -17,10 +17,10 @@
                 <tr class="users__table-master">
                     <th class="users__table-item">User</th>
                     <th class="users__table-item">Telefono</th>
-                    <th class="users__table-item">Rol</th>
-                    <th class="users__table-item" id="last">Actualizacion</th>
+                    <th class="users__table-item" id="last">Rol</th>
+                    <th class="users__table-item">Requerido</th>
                 </tr>
-                {{ macros. render_phonesTableData(phones, 'Administrador') }}
+                {{ macros. render_phonesTableData(phones, 'Administrador', updatephones) }}
             </table>
         </div>
 
@@ -32,10 +32,10 @@
                 <tr class="users__table-master">
                     <th class="users__table-item">User</th>
                     <th class="users__table-item">Telefono</th>
-                    <th class="users__table-item">Rol</th>
-                    <th class="users__table-item" id="last">Actualizacion</th>
+                    <th class="users__table-item" id="last">Rol</th>
+                    <th class="users__table-item">Requerido</th>
                 </tr>
-                {{ macros. render_phonesTableData(phones, 'Operario') }}
+                {{ macros. render_phonesTableData(phones, 'Operario', updatephones) }}
             </table>
         </div>
     {% else %}
