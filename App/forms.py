@@ -57,3 +57,8 @@ class DeleteUser(FlaskForm):
 
 class UpdatePhoneRequired(FlaskForm):
     submit = SubmitField('Update')
+
+class UpdateConfiguration(FlaskForm):
+    resolucioncamara = StringField('Resolucion de la camara: ', render_kw={"placeholder": "resolucion"})
+    tiempodeespera = StringField('Tiempor de Espera: ', render_kw={"placeholder": "espera"})
+    submit = SubmitField('Guardar')

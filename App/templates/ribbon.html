@@ -39,7 +39,7 @@
                     <ul class="user__nav--block">
                         <li class="nav__block--item"><a href="{{ url_for('account') }}" class="linked__ribbon--menu">Cuenta</a></li>
                         <li class="nav__block--item"><a href="{{ url_for('auth.changePassword') }}" class="linked__ribbon--menu">C. Contraseña</a></li>
-                        <li class="nav__block--item"><a href="#" class="linked__ribbon--menu">Datos de Configuración</a></li>
+                        <li class="nav__block--item"><a href="{{ url_for( 'auth.configuration' ) }}" class="linked__ribbon--menu">Datos de Configuración</a></li>
                         <li class="nav__block--item"><a href="{{ url_for('auth.logout') }}" class="linked__ribbon--menu">Log Out</a></li>
                     </ul>
                 </div>

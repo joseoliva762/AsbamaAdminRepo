@@ -5,7 +5,8 @@
         {% else %}
             <a href="{{ url_for('index') }}">
         {% endif %}
-            <img class="header__logo-img" src="https://i.ibb.co/1Qjjj2t/pHcq4C3C.jpg" alt="Asbama Logo">
+            <!-- <img class="header__logo-img" src="https://i.ibb.co/1Qjjj2t/pHcq4C3C.jpg" alt="Asbama Logo"> -->
+            <img class="header__logo-img" src="{{ url_for('static', filename='images/logo_vec.png') }}" alt="Asbama Logo">
             <div class="header__logo-brand">
                 <h1 class="brand__info-title">Asbama</h1>
                 <p class="brand__info-slg">Asociación de Bananeros del Magdalena y la Guajira</p>

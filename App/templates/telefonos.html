@@ -11,14 +11,14 @@
     {% if userIp and current_user.role == 'Administrador' %}
         <div class="current__user-info">
             <div class="table__title">
-                Telefonos para Emergencias de Administradores
+                Telefonos de Administradores
             </div>
             <table class="currents__users-table">
                 <tr class="users__table-master">
-                    <th class="users__table-item">User</th>
+                    <th class="users__table-item corner-left">User</th>
                     <th class="users__table-item">Telefono</th>
                     <th class="users__table-item" id="last">Rol</th>
-                    <th class="users__table-item">Requerido</th>
+                    <th class="users__table-item corner-right">Requerido</th>
                 </tr>
                 {{ macros. render_phonesTableData(phones, 'Administrador', updatephones) }}
             </table>
@@ -30,10 +30,10 @@
             </div>
             <table class="currents__users-table">
                 <tr class="users__table-master">
-                    <th class="users__table-item">User</th>
+                    <th class="users__table-item corner-left">User</th>
                     <th class="users__table-item">Telefono</th>
                     <th class="users__table-item" id="last">Rol</th>
-                    <th class="users__table-item">Requerido</th>
+                    <th class="users__table-item corner-right">Requerido</th>
                 </tr>
                 {{ macros. render_phonesTableData(phones, 'Operario', updatephones) }}
             </table>

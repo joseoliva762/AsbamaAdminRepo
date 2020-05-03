@@ -52,9 +52,23 @@ def getPhoneByUserId(userId):
     for phone in phones:
         return phone
 
+def setNumersCount(signo='+'):
+    numberCount = db.collection('configuracion').document('configuraciongeneral').get().to_dict()['numerodeusuarios']
+    if( signo == '+' ):
+        numberCount += 1
+    elif( signo == '-' ):
+        numberCount -= 1
+    db.collection('configuracion').document('configuraciongeneral').update({
+        'numerodeusuarios': numberCount,
+        'fechadeactualizacion': datetime.now()
+    })
+
+
 def deleteFromPhones(phoneId):
     phoneRef = db.collection('telefonos').document(str(phoneId))
     phoneRef.delete()
+    setNumersCount('-')
+
 
 def putUser(userData):
     userRef = db.collection('users').document(userData.id)
@@ -78,6 +92,7 @@ def putUser(userData):
         'fechadeactualizacion': datetime.now(),
         'requerido': False
     })
+    setNumersCount('+')
 
 def getNewId():
     return uuid.uuid1()
@@ -124,6 +139,15 @@ def getPhonesByAdmin(phones):
         user = getUserById(phone.to_dict()['user'])
         model = PhoneModel(user, phone.to_dict()['telefono'], user.to_dict()['role'], phone.to_dict()['fechadeactualizacion'], phone.to_dict()['requerido'])
         phoneTemplateData.append(model) 
+    return phoneTemplateData
+
+def getPhoneRequiredCallback(phones):
+    phoneTemplateData = list()
+    for phone in phones:
+        if (phone.to_dict()['requerido']):
+            user = getUserById(phone.to_dict()['user'])
+            model = PhoneModel(user, phone.to_dict()['telefono'], user.to_dict()['role'], phone.to_dict()['fechadeactualizacion'], phone.to_dict()['requerido'])
+            phoneTemplateData.append(model) 
     return phoneTemplateData
 
 def setCurrentRegister(registerId, userId, fechadecreacion, descripcion):
@@ -174,7 +198,7 @@ def deleteRegister(userId):
 
 def updateRequired(phoneId, required):
     phoneRef = _getPhoneRef(phoneId)
-    phoneRef.update({ 
+    phoneRef.update({
         'requerido': not bool(required),
         'fechadeactualizacion': datetime.now()
     })
@@ -186,3 +210,23 @@ def getPhoneId(phoneNumbre):
     telefonos = db.collection('telefonos').where('telefono', '==', phoneNumbre).get()
     for telefono in telefonos:
         return telefono
+
+def getConfigurationInfo():
+    registers = getRegister()
+    db.collection('configuracion').document('configuraciongeneral').update({
+        'numeroderegistros': _getCountInfo(registers)
+    })
+    return db.collection('configuracion').document('configuraciongeneral').get()
+
+def _getCountInfo(fullData):
+    dataCount = 0
+    for data in fullData:
+        dataCount += 1
+    return dataCount
+
+def updateConfigInfoDB(resolucion, espera):
+    db.collection('configuracion').document('configuraciongeneral').update({
+        'tiempodeespera': espera,
+        'resolucioncamara': resolucion,
+        'fechadeactualizacion': datetime.now()
+    })

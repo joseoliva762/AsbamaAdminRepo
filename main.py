@@ -125,3 +125,15 @@ def updatePhoneRequired(telefono=None, required=0):
     phone = getPhoneId(telefono)
     updateRequired(phone.id, required)
     return redirect( url_for('telefonos') )
+
+@app.route('/telefonos/update/config/<string:telefono>/<int:required>', methods=['GET', 'POST'])
+@login_required
+def updatePhoneRequiredFromConfig(telefono=None, required=0):
+    userIp = session.get('userIp')
+    context = {
+        'userIp': userIp,
+        'registros': registros
+    }
+    phone = getPhoneId(telefono)
+    updateRequired(phone.id, required)
+    return redirect( url_for('auth.configuration') )

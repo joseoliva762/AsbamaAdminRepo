@@ -105,8 +105,8 @@
                 </a>
             </th>
             <td class="item">{{ register.telefono }}</td>
-            <td class="item" >{{ register.fecha }}</td>
-            <td class="item" id="last">{{ register.descripcion }}</td>
+            <td class="item" id="last">{{ register.fecha }}</td>
+            <td class="item">{{ register.descripcion }}</td>
         </tr>
     {% endfor %}
 {% endmacro %}
@@ -162,4 +162,45 @@
         </tr>
         {% endif %}
     {% endfor %}
+{% endmacro %}
+
+{% macro render_phonesTableDataFromConfig(phones, updatephones) %}
+    <div class="table__contain">
+        {% for phone in phones %}
+            <tr class="users__table-row">
+                <th>
+                    <a class="vinculo" href="{{ url_for('users.externalUserData', username=phone.user.to_dict()['username']) }}">
+                        {{ phone.user.to_dict()['username'].title() }}
+                    </a>
+                </th>
+                <td class="item">{{ phone.telefono }}</td>
+                <td class="item" id="last" >{{ phone.role}}</td>
+                <td class="item" >
+                    <form action="{{ url_for('updatePhoneRequiredFromConfig', telefono=phone.telefono, required=phone.required) }}" method="POST" class="form__container-session" role="form">
+                        {% if phone.required %}
+                            <div class="required__box" id="required__true">
+                        {% else %}
+                            <div class="required__box" id="required__false">
+                        {% endif %}
+                            {{ updatephones.submit }}
+                            {{ phone.required }}
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro render_configuracionGeneralItem(title, data, large=False) %}
+        {% if large %}
+        <div class="configuracion__general--item-large">
+        {% else %}
+            <div class="configuracion__general--item">
+        {% endif %}
+        <div class="item__title">
+            {{ title }}
+        </div>
+        {{ data }}
+    </div>
 {% endmacro %}

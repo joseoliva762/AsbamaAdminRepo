@@ -1,11 +1,13 @@
 from . import auth
-from App.forms import LoginForm, SignupForm, ChangePassword, UpdateData, UpdateExternalData
+from App.forms import ChangePassword, LoginForm, SignupForm, UpdateData, UpdateExternalData, UpdatePhoneRequired, UpdateConfiguration
 from flask_login import login_user, login_required, logout_user
 from flask import render_template, redirect, url_for, flash, request, session, make_response
 from App.firestoreService import getUser, getNewId, getUserById, putUser, updatePassword, updateUserData, updateExternalUserData
+from App.firestoreService import getConfigurationInfo, getPhoneRequiredCallback, getPhones, getPhonesByAdmin, updateConfigInfoDB
 from App.model import UserData, UserModel
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
+import random
 #from App import loadUser
 
 
@@ -188,5 +190,59 @@ def logout():
     logout_user()
     flash("Sesion Cerrada.")
     return redirect( url_for('auth.login'))
+
+@auth.route('/configuracion', methods=['GET', 'POST'])
+@login_required
+def configuration():
+    userIp = session.get('userIp')
+    configuracion = getConfigurationInfo()
+    telefonos = getPhones()
+    phonesByAdmins = getPhoneRequiredCallback(telefonos)
+    updatePhones = UpdatePhoneRequired()
+    updatePhones.submit.id = "updateForm"
+    context =  {
+        'userIp': userIp,
+        'configuracion': configuracion,
+        'phones': phonesByAdmins,
+        'updatephones': updatePhones,
+        'background': chargeBackgruound()
+    }
+    return render_template('configuracion.html', **context)
+
+def chargeBackgruound():
+    selector = round(random.random() * 5)
+    return url_for('static', filename='images/background{}.jpg'.format(selector))
+
+@auth.route('/configuracion/update', methods=['GET', 'POST'])
+@login_required
+def configurationUpdate():
+    userIp = session.get('userIp')
+    configuracion = getConfigurationInfo()
+    telefonos = getPhones()
+    phonesByAdmins = getPhoneRequiredCallback(telefonos)
+    updatePhones = UpdatePhoneRequired()
+    updatePhones.submit.id = "updateForm"
+    configuracionUpdate = UpdateConfiguration()
+    configuracionUpdate.resolucioncamara.render_kw['placeholder'] = configuracion.to_dict()['resolucioncamara']
+    configuracionUpdate.resolucioncamara.id = 'update__data'
+    configuracionUpdate.tiempodeespera.render_kw['placeholder'] = configuracion.to_dict()['tiempodeespera']
+    configuracionUpdate.tiempodeespera.id = 'update__data'
+    configuracionUpdate.submit.id = 'boton__actualizar'
+    context =  {
+        'userIp': userIp,
+        'configuracion': configuracion,
+        'phones': phonesByAdmins,
+        'updatephones': updatePhones,
+        'background': chargeBackgruound(),
+        'configuracionUpdate': configuracionUpdate
+    }
+    if(configuracionUpdate.is_submitted()):
+        resolucion = validarData(configuracionUpdate.resolucioncamara.data, configuracionUpdate.resolucioncamara.render_kw['placeholder']) 
+        espera = validarData(configuracionUpdate.tiempodeespera.data, configuracionUpdate.tiempodeespera.render_kw['placeholder']) 
+        updateConfigInfoDB(resolucion, espera)
+        flash('Actualizacion de la configuracion realizada con exito.')
+        return redirect(url_for('auth.configuration'))
+
+    return render_template('configuracionupdate.html', **context)
 
 # https://meet.jit.si/RevisionInterfazAdministrativa

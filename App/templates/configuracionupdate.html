@@ -1,0 +1,56 @@
+{% extends "base.html"  %}
+{% import "macros.html" as macros %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+
+{% block title %}
+    {{super()}}
+    Actualizar Configuracion
+{% endblock %}
+
+
+{% block content%}
+    {% if userIp %}
+        <div class="configuracion">
+            <h2 class="configuracion__general--title">
+                Configuracion General del Sistema
+            </h2>
+        </div>
+        <form action="{{ url_for('auth.configurationUpdate') }}" method="POST" class="configuracion__general--detalles" role="form">
+            <section class="general__detalles first-section">
+                {{ macros.render_configuracionGeneralItem('Resolucion de la Camara: ', configuracionUpdate.resolucioncamara) }}
+                {{ macros.render_configuracionGeneralItem('Tiempo de Espera (segs): ', configuracionUpdate.tiempodeespera) }}
+                {{ macros.render_configuracionGeneralItem('Xxxxxx xxxx xxxxx: ',  '50') }}
+                <!-- Boton para actualizar -->
+                {{ configuracionUpdate.submit }}
+            </section>
+            <section class="general__detalles">
+                {{ macros.render_configuracionGeneralItem('Numero de Registros: ', configuracion.to_dict()['numeroderegistros']) }}
+                {{ macros.render_configuracionGeneralItem('Numero de usuarios: ', configuracion.to_dict()['numerodeusuarios']) }}
+                {{ macros.render_configuracionGeneralItem('Xxxxxxxx xxxx xxxxxx: ','50') }}
+                {{ macros.render_configuracionGeneralItem('Fecha de Actualizacion: ', configuracion.to_dict()['fechadeactualizacion'], large=True) }}
+            </section>
+        </form>
+
+        <div class="configuracion">
+            <h3 class="item__title" id="table__phones">
+                Telefonos para Emergencias.
+            </h3>
+            <table class="currents__users-table">
+                <tr class="users__table-master">
+                    <th class="users__table-item corner-left">User</th>
+                    <th class="users__table-item">Telefono</th>
+                    <th class="users__table-item" id="last">Rol</th>
+                    <th class="users__table-item corner-right">Requerido</th>
+                </tr>
+                {{ macros.render_phonesTableDataFromConfig(phones, updatephones) }}
+            </table>
+        </div>
+        <div class="bkg__container">
+            <!-- <img src="https://p4.wallpaperbetter.com/wallpaper/968/675/647/banana-banana-trees-isla-dometepe-nicaragua-wallpaper-preview.jpg" alt="imagen" class="background__image"> -->
+            <img src="{{ background }}" alt="imagen" class="background__image">
+        </div>
+    {% else %}
+        <a href="{{ url_for('home') }}"> Algo ha salido mal, Reload </a>
+    {% endif %}
+{% endblock %}
