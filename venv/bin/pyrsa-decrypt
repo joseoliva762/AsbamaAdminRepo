@@ -1,4 +1,4 @@
-#!/home/queen/Documentos/AsbamaSolution/Admin/venv/bin/python3.7
+#!/home/queen/Documentos/AsbamaSolution/Admin/venv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
