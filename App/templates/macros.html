@@ -117,7 +117,7 @@
             <img class="carousel__item-img" src="{{ user.to_dict()['imagen'] }}" alt="{{ user.to_dict()['username'] }}">
             <div class="carousel__item-details">
                     <p class="item__details-username">
-                        <a class="vinculo" href="{{ url_for('users.externalUserData', username=user.to_dict()['username']) }}">
+                        <a class="vinculo green__text" href="{{ url_for('users.externalUserData', username=user.to_dict()['username']) }}">
                             {{ user.to_dict()['username'].title() }}
                         </a>
                     </p>
@@ -125,6 +125,7 @@
                     <p class="item__details-data">{{ user.to_dict()['role'] }}</p>
                     <p class="item__details-data">{{ user.to_dict()['telefono'] }}</p>
             </div>
+            <a href="{{ url_for('users.externalUserData', username=user.to_dict()['username']) }}" class="carousel__item-anchor"></a>
         </div>
     {% endfor %}
 {% endmacro %}
@@ -148,7 +149,7 @@
                         <div class="required__box" id="required__false">
                     {% endif %}
                         {{ updatephones.submit }}
-                        {{ phone.required }}
+                        {{ 'ON' if phone.required else 'OFF' }}
                     </div>
                 </form>
                 <!-- {% if phone.required %}
@@ -183,7 +184,7 @@
                             <div class="required__box" id="required__false">
                         {% endif %}
                             {{ updatephones.submit }}
-                            {{ phone.required }}
+                            {{  'ON' if phone.required else 'OFF' }}
                         </div>
                     </form>
                 </td>
@@ -202,5 +203,29 @@
             {{ title }}
         </div>
         {{ data }}
+    </div>
+{% endmacro %}
+
+{% macro render_configuracionGeneralItemBool(statesystem, title, data, large=False) %}
+        {% if large %}
+        <div class="configuracion__general--item-large">
+        {% else %}
+            <div class="configuracion__general--item">
+        {% endif %}
+        <div class="item__title">
+            {{ title }}
+        </div>
+        <div class="item">
+            <form action="{{ url_for('auth.configurationUpdateStateSytem', required=data) }}" method="POST" class="form__container-session" role="form">
+                {% if data %}
+                    <div class="required__box" id="required__true">
+                {% else %}
+                    <div class="required__box" id="required__false">
+                {% endif %}
+                    {{ statesystem.submit }}
+                    {{ 'ON' if data else 'OFF' }}
+                </div>
+            </form>
+        </div>
     </div>
 {% endmacro %}

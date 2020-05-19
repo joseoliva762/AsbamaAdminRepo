@@ -62,3 +62,6 @@ class UpdateConfiguration(FlaskForm):
     resolucioncamara = StringField('Resolucion de la camara: ', render_kw={"placeholder": "resolucion"})
     tiempodeespera = StringField('Tiempor de Espera: ', render_kw={"placeholder": "espera"})
     submit = SubmitField('Guardar')
+
+class UpdateStateSystem(FlaskForm):
+    submit = SubmitField('Update')

@@ -338,6 +338,7 @@
 .form__container-session{
     color: black;
     display: flex;
+    background: transparent;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -692,8 +693,28 @@
     position: relative;
 }
 
+.carousel__item-anchor{
+    background-color: transparent;
+    border-radius: 20px;
+    position: absolute;
+    bottom: 0;
+    height: 110%;
+    overflow: hidden;
+    width: 110%;
+    z-index: 0;
+    left: 0;
+    right: 0;
+}
+.green__text{
+    color: black;
+    font-weight: bold;
+}
 .carousel__item:hover ~ .carousel__item{
     transform: translate3d(10px, 0, 0);
+}
+
+.carousel__item:hover  .green__text{
+    color: var(--verde-asbama);
 }
 
 .carousel__container:hover .carousel__item{
@@ -992,6 +1013,9 @@
     color: #2a2a2a;
 }
 
+.item{
+    background: transparent;
+}
 
 
 /* Media *************************************************************************************/

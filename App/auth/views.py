@@ -1,9 +1,10 @@
 from . import auth
-from App.forms import ChangePassword, LoginForm, SignupForm, UpdateData, UpdateExternalData, UpdatePhoneRequired, UpdateConfiguration
+from App.forms import ChangePassword, LoginForm, SignupForm, UpdateData, UpdateExternalData, UpdatePhoneRequired, UpdateConfiguration, UpdateStateSystem
 from flask_login import login_user, login_required, logout_user
 from flask import render_template, redirect, url_for, flash, request, session, make_response
 from App.firestoreService import getUser, getNewId, getUserById, putUser, updatePassword, updateUserData, updateExternalUserData
 from App.firestoreService import getConfigurationInfo, getPhoneRequiredCallback, getPhones, getPhonesByAdmin, updateConfigInfoDB
+from App.firestoreService import setStateSystem
 from App.model import UserData, UserModel
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
@@ -200,12 +201,16 @@ def configuration():
     phonesByAdmins = getPhoneRequiredCallback(telefonos)
     updatePhones = UpdatePhoneRequired()
     updatePhones.submit.id = "updateForm"
+    stateSytem = UpdateStateSystem()
+    stateSytem.submit.id = "updateForm"
+
     context =  {
         'userIp': userIp,
         'configuracion': configuracion,
         'phones': phonesByAdmins,
         'updatephones': updatePhones,
-        'background': chargeBackgruound()
+        'background': chargeBackgruound(),
+        'statesystem': stateSytem
     }
     return render_template('configuracion.html', **context)
 
@@ -246,3 +251,13 @@ def configurationUpdate():
     return render_template('configuracionupdate.html', **context)
 
 # https://meet.jit.si/RevisionInterfazAdministrativa
+
+@auth.route('/configuracion/update/statesystem/<int:required>', methods=['GET', 'POST'])
+@login_required
+def configurationUpdateStateSytem(required=0):
+    userIp = session.get('userIp')
+    context = {
+        'userIp': userIp,
+    }
+    setStateSystem(required)
+    return redirect( url_for('auth.configuration') )

@@ -144,10 +144,10 @@ def getPhonesByAdmin(phones):
 def getPhoneRequiredCallback(phones):
     phoneTemplateData = list()
     for phone in phones:
-        if (phone.to_dict()['requerido']):
-            user = getUserById(phone.to_dict()['user'])
-            model = PhoneModel(user, phone.to_dict()['telefono'], user.to_dict()['role'], phone.to_dict()['fechadeactualizacion'], phone.to_dict()['requerido'])
-            phoneTemplateData.append(model) 
+        # if (phone.to_dict()['requerido']):
+        user = getUserById(phone.to_dict()['user'])
+        model = PhoneModel(user, phone.to_dict()['telefono'], user.to_dict()['role'], phone.to_dict()['fechadeactualizacion'], phone.to_dict()['requerido'])
+        phoneTemplateData.append(model) 
     return phoneTemplateData
 
 def setCurrentRegister(registerId, userId, fechadecreacion, descripcion):
@@ -229,4 +229,13 @@ def updateConfigInfoDB(resolucion, espera):
         'tiempodeespera': espera,
         'resolucioncamara': resolucion,
         'fechadeactualizacion': datetime.now()
+    })
+
+def getStateSystem():
+    return db.collection('configuracion').document('configuraciongeneral').get()
+
+def setStateSystem(estado):
+    db.collection('configuracion').document('configuraciongeneral').update({
+        'fechadeactualizacion': datetime.now(),
+        'estadodelsistema': not estado
     })

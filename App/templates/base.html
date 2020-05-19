@@ -35,27 +35,19 @@
         </body>
         <script type="text/javascript">
             setTimeout(() => {
-                CerrarNotificacionEmergente()
+                CerrarContenedor("alerta");
             }, 5000 );
             setTimeout(() => {
-                CerrarNotificacionEmergenteError()
+                CerrarContenedor("error");
             }, 10000 );
+
             setTimeout(() =>{
-                CerrarBienvenida()
-            }, 15000)
-            function CerrarNotificacionEmergente(){
-                var contenedor = document.getElementById("alerta");
-                contenedor.style.display = "none";
-                // return true;
-            }
-            function CerrarNotificacionEmergenteError(){
-                var contenedor = document.getElementById("error");
-                contenedor.style.display = "none";
-                // return true;
-            }
-            function CerrarBienvenida(){
-                var contenedor = document.getElementById("bienvenida");
-                contenedor.style.display = "none";
+                CerrarContenedor("bienvenida");
+            }, 15000);
+
+            function CerrarContenedor(id){
+                let contenedor = document.getElementById(id);
+                contenedor ? contenedor.style.display = "none" : console.log(`Contenedor con Id: ${id}, no encontrado.`);
             }
         </script>
     </html>

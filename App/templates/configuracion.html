@@ -28,8 +28,8 @@
             </section>
             <section class="general__detalles">
                 {{ macros.render_configuracionGeneralItem('Numero de Registros: ', configuracion.to_dict()['numeroderegistros']) }}
-                {{ macros.render_configuracionGeneralItem('Numero de usuarios: ', configuracion.to_dict()['numerodeusuarios']) }}
-                {{ macros.render_configuracionGeneralItem('Xxxxxxxx xxxx xxxxxx: ','50') }}
+                {{ macros.render_configuracionGeneralItem('Numero de Usuarios: ', configuracion.to_dict()['numerodeusuarios']) }}
+                {{ macros.render_configuracionGeneralItemBool(statesystem, 'Estado del Sistema: ', configuracion.to_dict()['estadodelsistema']) }}
                 {{ macros.render_configuracionGeneralItem('Fecha de Actualizacion: ', configuracion.to_dict()['fechadeactualizacion'], large=True) }}
             </section>
         </section>
