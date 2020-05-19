@@ -65,3 +65,6 @@ class UpdateConfiguration(FlaskForm):
 
 class UpdateStateSystem(FlaskForm):
     submit = SubmitField('Update')
+
+class UpdateStateDoor(FlaskForm):
+    submit = SubmitField('Update')

@@ -1,10 +1,11 @@
 from . import auth
 from App.forms import ChangePassword, LoginForm, SignupForm, UpdateData, UpdateExternalData, UpdatePhoneRequired, UpdateConfiguration, UpdateStateSystem
+from App.forms import UpdateStateDoor
 from flask_login import login_user, login_required, logout_user
 from flask import render_template, redirect, url_for, flash, request, session, make_response
 from App.firestoreService import getUser, getNewId, getUserById, putUser, updatePassword, updateUserData, updateExternalUserData
 from App.firestoreService import getConfigurationInfo, getPhoneRequiredCallback, getPhones, getPhonesByAdmin, updateConfigInfoDB
-from App.firestoreService import setStateSystem
+from App.firestoreService import setStateSystem, setStateDoor
 from App.model import UserData, UserModel
 from werkzeug.security import generate_password_hash, check_password_hash
 import uuid
@@ -203,6 +204,8 @@ def configuration():
     updatePhones.submit.id = "updateForm"
     stateSytem = UpdateStateSystem()
     stateSytem.submit.id = "updateForm"
+    stateDoor = UpdateStateDoor()
+    stateDoor.submit.id =  "updateForm"
 
     context =  {
         'userIp': userIp,
@@ -210,7 +213,8 @@ def configuration():
         'phones': phonesByAdmins,
         'updatephones': updatePhones,
         'background': chargeBackgruound(),
-        'statesystem': stateSytem
+        'statesystem': stateSytem,
+        'statedoor': stateDoor
     }
     return render_template('configuracion.html', **context)
 
@@ -260,4 +264,14 @@ def configurationUpdateStateSytem(required=0):
         'userIp': userIp,
     }
     setStateSystem(required)
+    return redirect( url_for('auth.configuration') )
+
+@auth.route('/configuracion/update/statedoor/<int:required>', methods=['GET', 'POST'])
+@login_required
+def configurationUpdateStateDoor(required=0):
+    userIp = session.get('userIp')
+    context = {
+        'userIp': userIp,
+    }
+    setStateDoor(required)
     return redirect( url_for('auth.configuration') )

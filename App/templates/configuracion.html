@@ -20,7 +20,7 @@
             <section class="general__detalles first-section">
                 {{ macros.render_configuracionGeneralItem('Resolucion de la Camara: ', configuracion.to_dict()['resolucioncamara']) }}
                 {{ macros.render_configuracionGeneralItem('Tiempo de Espera (segs): ', configuracion.to_dict()['tiempodeespera']) }}
-                {{ macros.render_configuracionGeneralItem('Xxxxxx xxxx xxxxx: ',  '50') }}
+                {{ macros.render_configuracionGeneralItemBoolDoor(statedoor, 'Sensor de puerta: ',  configuracion.to_dict()['estadosensordepuerta']) }}
                 <!-- Boton para actualizar -->
                 <a href="{{ url_for('auth.configurationUpdate') }}" class="boton__actualizar">
                     Actualizar

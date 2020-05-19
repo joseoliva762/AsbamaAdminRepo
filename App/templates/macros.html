@@ -229,3 +229,27 @@
         </div>
     </div>
 {% endmacro %}
+
+{% macro render_configuracionGeneralItemBoolDoor(statedoor, title, data, large=False) %}
+        {% if large %}
+        <div class="configuracion__general--item-large">
+        {% else %}
+            <div class="configuracion__general--item">
+        {% endif %}
+        <div class="item__title">
+            {{ title }}
+        </div>
+        <div class="item">
+            <form action="{{ url_for('auth.configurationUpdateStateDoor', required=data) }}" method="POST" class="form__container-session" role="form">
+                {% if data %}
+                    <div class="required__box" id="required__true">
+                {% else %}
+                    <div class="required__box" id="required__false">
+                {% endif %}
+                    {{ statedoor.submit }}
+                    {{ 'ON' if data else 'OFF' }}
+                </div>
+            </form>
+        </div>
+    </div>
+{% endmacro %}

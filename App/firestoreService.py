@@ -239,3 +239,9 @@ def setStateSystem(estado):
         'fechadeactualizacion': datetime.now(),
         'estadodelsistema': not estado
     })
+
+def setStateDoor(estado):
+    db.collection('configuracion').document('configuraciongeneral').update({
+        'fechadeactualizacion': datetime.now(),
+        'estadosensordepuerta': not estado
+    })
