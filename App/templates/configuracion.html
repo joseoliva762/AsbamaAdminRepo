@@ -10,7 +10,7 @@
 
 
 {% block content%}
-    {% if userIp %}
+    {% if userIp and current_user.role == 'Administrador' %}
         <div class="configuracion">
             <h2 class="configuracion__general--title">
                 Configuracion General del Sistema
