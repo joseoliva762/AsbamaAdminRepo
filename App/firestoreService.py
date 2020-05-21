@@ -30,7 +30,10 @@ if (not len(firebase_admin._apps)):
 db= firestore.client()
 
 def getUsers():
-    return db.collection('users').get()
+    return db.collection('users').order_by(
+        'fechadecreacion',
+        direction=firestore.Query.DESCENDING
+    ).get()
 
 def getUserRegisters(userId):
     return db.collection('users').document(userId).collection('registers').get()
@@ -159,7 +162,10 @@ def setCurrentRegister(registerId, userId, fechadecreacion, descripcion):
     })
 
 def getCurrentRegister(userId):
-    registros = db.collection('users').document(userId).collection('registers').get()
+    registros = db.collection('users').document(userId).collection('registers').order_by(
+        'fechadecreacion',
+        direction=firestore.Query.DESCENDING
+    ).get()
     registerTemplateData = list()
     for registro in registros:
         user = getUserById(str(registro.to_dict()['user']))
@@ -180,7 +186,10 @@ def setRegister(userId,descripcion):
     setCurrentRegister(registerId, userId, fechadecreacion, descripcion)
 
 def getRegister():
-    registros = db.collection('register').get()
+    registros = db.collection('register').order_by(
+        'fechadecreacion',
+        direction=firestore.Query.DESCENDING
+    ).get()
     registerTemplateData = list()
     for registro in registros:
         user = getUserById(str(registro.to_dict()['user']))
