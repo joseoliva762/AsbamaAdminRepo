@@ -192,8 +192,11 @@ def getRegister():
     ).get()
     registerTemplateData = list()
     for registro in registros:
-        user = getUserById(str(registro.to_dict()['user']))
-        model = RegitrosModel(user.to_dict()['username'], user.to_dict()['telefono'], registro.to_dict()['fechadecreacion'], registro.to_dict()['descripcion'])
+        if(str(registro.to_dict()['user']) != 'undefined' ):
+            user = getUserById(str(registro.to_dict()['user']))
+            model = RegitrosModel(user.to_dict()['username'], user.to_dict()['telefono'], registro.to_dict()['fechadecreacion'], registro.to_dict()['descripcion'])
+        else:
+            model = RegitrosModel(str(registro.to_dict()['user']),str(registro.to_dict()['user']), registro.to_dict()['fechadecreacion'], registro.to_dict()['descripcion'])
         registerTemplateData.append(model) 
     return registerTemplateData
 
