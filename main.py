@@ -94,6 +94,13 @@ def telefonos():
     }
     return render_template('telefonos.html', **context)
 
+@app.route('/users/undefined')
+@login_required
+def undefined():
+    userIp = request.remote_addr
+    response = make_response(redirect('/home'))
+    session['userIp'] = userIp
+    return response
 
 @app.route('/registros', methods=['GET', 'POST'])
 @login_required
