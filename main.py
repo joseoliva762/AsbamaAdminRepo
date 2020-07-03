@@ -52,7 +52,6 @@ def home():
     #username = current_user.to_dict().username
     # username = session.get('username')
     #response = make_response(redirect('/home'))
-    print('Llegoooo aquiiiiii......')
     registros = getRegister()
     context = {
         'userIp': userIp,
@@ -144,3 +143,28 @@ def updatePhoneRequiredFromConfig(telefono=None, required=0):
     phone = getPhoneId(telefono)
     updateRequired(phone.id, required)
     return redirect( url_for('auth.configuration') )
+
+@app.route('/evidence/<string:date>', methods=['GET', 'POST'])
+@login_required
+def getEvidence(date=None):
+    userIp = session.get('userIp')
+    path = getPath(date, 'h264')
+    video = url_for('static', filename='{}'.format(path))
+    # video = url_for('static', filename='demo.mp4')
+    context = {
+        'userIp': userIp,
+        'background': chargeBackgruound(),
+        'date': date,
+        'path': path,
+        'video': video
+    }
+    return render_template('evidence.html', **context)
+
+def getPath( date, extension, root='Security/Evidencias/'):
+   path = '{}\'{}\'/\'{}\'.{}'.format(
+       root,
+       date,
+       date,
+       extension
+   )
+   return path

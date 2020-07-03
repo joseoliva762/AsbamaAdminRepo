@@ -1017,6 +1017,27 @@
     background: transparent;
 }
 
+.video__container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.video__content{
+    border-radius: 15px;
+    overflow: hidden;    
+    width: 90%;
+}
+.video{
+    width: 100%;
+}
+.date__title{
+    font-size: 25px;
+    font-weight: bold;
+    color: var(--verde-asbama);
+    margin-bottom: 15px;
+}
+
 
 /* Media *************************************************************************************/
 @media(max-width: 1100px){
@@ -1187,5 +1208,12 @@
     }
     .main__search .main__search--title h2{
         font-size: large;
+    }
+    .video__content{
+        border-radius: 5px;
+        width: 100%;
+    }
+    .date__title{
+        font-size: 15px;
     }
 }

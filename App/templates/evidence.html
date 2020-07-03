@@ -1,0 +1,31 @@
+{% extends "base.html"  %}
+{% import "macros.html" as macros %}
+
+{% block title %}
+    {{super()}}
+    Evidencia
+{% endblock %}
+
+{% block content%}
+    {% if userIp %}
+            <div class="current__user-info">
+                <div class="table__title">
+                    Evidencia de la fecha: 
+                </div>
+                <div class="date__title">
+                    {{ date }}
+                </div>
+                <div class="video__container">
+                    <div class="video__content">
+                        <video controls class="video" src="{{ video }}"></video>
+                    </div>
+                </div>
+            </div>
+            <div class="bkg__container">
+                <img src="{{ background }}" alt="imagen" class="background__image">
+            </div>
+    {% else %}
+        <a href="{{ url_for('index') }}"> Algo ha salido mal, Reload </a>
+    {% endif %}
+    
+{% endblock %}

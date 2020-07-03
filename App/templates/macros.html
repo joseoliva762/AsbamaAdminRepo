@@ -105,7 +105,12 @@
                 </a>
             </th>
             <td class="item">{{ register.telefono }}</td>
-            <td class="item" id="last">{{ register.fecha }}</td>
+            <th  id="last">
+                <a class="vinculo" href="{{ url_for('getEvidence', date=register.fecha) }}">
+                    {{ register.fecha }}
+                </a>
+            </th>
+            <!-- <td class="item" id="last">{{  register.fecha }}</td> -->
             <td class="item">{{ register.descripcion }}</td>
         </tr>
     {% endfor %}
