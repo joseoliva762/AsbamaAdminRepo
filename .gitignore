@@ -1,1 +1,4 @@
 venv/
+App/static/Security
+*.h24
+*.mp4
