@@ -1017,18 +1017,23 @@
     background: transparent;
 }
 
-.video__container{
+.media__container{
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column-reverse;
 }
-.video__content{
+.media__content{
     border-radius: 15px;
-    overflow: hidden;    
+    overflow: hidden;
     width: 90%;
+    margin-bottom: 20px;
 }
 .video{
+    width: 100%;
+}
+.foto{
     width: 100%;
 }
 .date__title{

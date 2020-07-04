@@ -150,13 +150,16 @@ def getEvidence(date=None):
     userIp = session.get('userIp')
     path = getPath(date, 'h264')
     video = url_for('static', filename='{}'.format(path))
+    path = getPath(date, 'jpg')
+    foto = url_for('static', filename='{}'.format(path))
     # video = url_for('static', filename='demo.mp4')
     context = {
         'userIp': userIp,
         'background': chargeBackgruound(),
         'date': date,
         'path': path,
-        'video': video
+        'video': video,
+        'foto': foto
     }
     return render_template('evidence.html', **context)
 
