@@ -1,3 +1,4 @@
+import time
 import RPi.GPIO as GPIO
 from Apps.Wiegand.utils.printer import Printer
 

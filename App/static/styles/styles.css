@@ -1043,7 +1043,26 @@
     margin-bottom: 15px;
 }
 
-
+.descargar__video{
+    width: 100%;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    background-color: var(--verde-asbama);
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+}
+.descargar__video:hover{
+    background-color: var(--green-font-alert);
+    cursor: pointer;
+}
+.descargar__video:active{
+    background-color: var(--verde-asbama);
+    cursor: pointer;
+}
 /* Media *************************************************************************************/
 @media(max-width: 1100px){
     .form__container{

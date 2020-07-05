@@ -1,7 +1,9 @@
 import time
 import picamera
 import os
+import subprocess
 from datetime import datetime
+from Apps.Hilos.convertThread import ConvertThread
 
 class Camara:
     def __init__(self, ruta = "../App/static/Security/Evidencias/", waitingTime = 3):
@@ -33,13 +35,13 @@ class Camara:
             print("Foto guardada en la ruta: {} [OK]".format(ruta))
 
     def getRuta(self, date = datetime.now(), extension = "jpg" ):
-        enrutado = "{}\'{}\'/".format(self.ruta, str(date))
+        enrutado = "{}\'{}+00:00\'/".format(self.ruta, str(date))
         try:
             os.mkdir(enrutado)
         except FileExistsError:
             print("Directorio encontrado")
         finally:
-            return "{}\'{}\'.{}".format(enrutado, str(date), extension)
+            return "{}\'{}+00:00\'.{}".format(enrutado, str(date), extension)
 
     def _camVideo(self, widht, heith , recordingTime, date):
         print("Grabando...")
@@ -53,3 +55,11 @@ class Camara:
             picam.stop_recording()
             picam.stop_preview()
             print("Video guardado en la ruta: {} [OK]".format(ruta))
+            #subprocess.call([ 'ffmpeg', '-i', ruta, self.getRuta(date,extension="mp4") ])
+            #print("Video convertido [OK]")
+            #modules = [
+             #   ruta,
+             #   self.getRuta(date,extension="mp4")
+            #]
+            #convert = ConvertThread("convertHilo", modules)
+            #convert.start()ggggg

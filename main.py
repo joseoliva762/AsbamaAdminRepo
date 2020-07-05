@@ -147,18 +147,18 @@ def updatePhoneRequiredFromConfig(telefono=None, required=0):
 @app.route('/evidence/<string:date>', methods=['GET', 'POST'])
 @login_required
 def getEvidence(date=None):
-    userIp = session.get('userIp')
-    path = getPath(date, 'h264')
-    video = url_for('static', filename='{}'.format(path))
+    userIp = session.get('userIp')    
     path = getPath(date, 'jpg')
     foto = url_for('static', filename='{}'.format(path))
+    path = getPath(date, 'h264')
+    video = url_for('static', filename='{}'.format(path))
     # video = url_for('static', filename='demo.mp4')
     context = {
         'userIp': userIp,
         'background': chargeBackgruound(),
         'date': date,
-        'path': path,
-        'video': video,
+        'videopath': video,
+        'downloadfile' : '',
         'foto': foto
     }
     return render_template('evidence.html', **context)

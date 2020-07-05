@@ -54,8 +54,8 @@ def _modulesInit():
 def sistemRestart():
     GPIO.cleanup()
     time.sleep(0.3)
-     wiegand, sim, camara, IntruderD, service = _modulesInit()
-     return  wiegand, sim, camara, IntruderD, service
+    wiegand, sim, camara, IntruderD, service = _modulesInit()
+    return  wiegand, sim, camara, IntruderD, service
 
 def _run(wiegand, sim, camara, intruderD, service):
     while(True):
